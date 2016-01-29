@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
 
-	public Rigidbody rb;
+	private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
