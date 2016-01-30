@@ -9,7 +9,7 @@ public class GenerateNPCs : MonoBehaviour {
 	private Sprite[] pants;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		hats = Resources.LoadAll<Sprite>("Sprites/characters/hats");
 		heads = Resources.LoadAll<Sprite>("Sprites/characters/head");
 		torsos = Resources.LoadAll<Sprite>("Sprites/characters/body");
@@ -18,7 +18,6 @@ public class GenerateNPCs : MonoBehaviour {
 		Appearance npcAppearance;
 		for (int i = 0; i < 50; i++) {
 			npcAppearance = GameObject.Instantiate(prefabNPC).GetComponent<Appearance>();
-			npcAppearance.transform.Rotate(new Vector3(90f, 0f, 0f));
 			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
 			npcAppearance.Initialize(
 				hats[Random.Range(0, hats.Length - 1)],
@@ -29,7 +28,7 @@ public class GenerateNPCs : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 	
 	}
 }

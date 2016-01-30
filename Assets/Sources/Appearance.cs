@@ -2,13 +2,15 @@
 using System.Collections;
 
 public class Appearance : MonoBehaviour {
+	
 	public SpriteRenderer hat;
 	public SpriteRenderer head;
 	public SpriteRenderer torso;
 	public SpriteRenderer pant;
 
+
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		
 	}
 
@@ -20,7 +22,7 @@ public class Appearance : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 	
 	}
 }
