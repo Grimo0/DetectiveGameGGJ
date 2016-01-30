@@ -1,0 +1,25 @@
+Etat initial du pentacle en début de partie :
+	-blanc
+	-bougies éteintes
+
+1ère cible :
+	-affichage du texte "The next is..."
+	-2sec
+	-la cible s'affiche au milieu du pentacle
+	-départ du chrono
+
+Mort de la cible :
+	-animation de mort sur la cible
+	-clignotement du pentacle en rouge
+	-1sec
+	-1er cercle qui se remplie de rouge
+	-1ère bougie qui s'allume
+	-disparition du modèle au milieu du pentacle
+
+2ème cible :
+	-affichage du texte "The next is..."
+	-2sec
+	-la cible s'affiche au milieu du pentacle
+	-départ du chrono
+
+..etc
