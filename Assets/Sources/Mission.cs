@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 public class Mission {
 
-	private List<CharacterPart> rules = new List<CharacterPart>();
+	private List<CharacterPart> parts = new List<CharacterPart>();
 
-	public void AddRule(CharacterPart part) {
-		for (int i = 0; i < rules.Count; i++) {
-			if (rules[0].category == part.category)
+	public void AddPart(CharacterPart part) {
+		for (int i = 0; i < parts.Count; i++) {
+			if (parts[0].category == part.category)
 				return;
 		}
 
-		rules.Add(part);
+		parts.Add(part);
 	}
 
-	public CharacterPart GetRule(int i) {
-		return rules[i];
+	public CharacterPart GetPart(int i) {
+		return parts[i];
 	}
 
 	public bool Contain(CharacterPart rule) {
-		return rules.Contains(rule);
+		return parts.Contains(rule);
 	}
 }
