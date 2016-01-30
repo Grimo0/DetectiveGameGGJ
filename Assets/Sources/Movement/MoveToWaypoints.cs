@@ -1,12 +1,34 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Events;
+
+using System.Collections.Generic;
 
 public class MoveToWaypoints : NPCBehaviour 
 {
 	[SerializeField]
 	private Transform[] m_Waypoints;
 
+	[SerializeField]
+	private UnityEvent OnPathFinished;
+
 	private int m_CurrentWaypoint;
+
+	public void AddWaypoints(Transform[] waypoints)
+	{
+		m_Waypoints = waypoints;				
+	}
+
+	public void CheckFinished()
+	{
+		if (m_CurrentWaypoint == m_Waypoints.Length - 1)
+		{
+			OnPathFinished.Invoke();
+		}
+		else
+		{
+			Move();
+		}
+	}
 
 	public override void Move()
 	{

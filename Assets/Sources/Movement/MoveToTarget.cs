@@ -17,6 +17,11 @@ public class MoveToTarget : NPCBehaviour
 		base.Update();
 	}
 
+	public void AddTarget(Transform target)
+	{
+		m_Target = target;
+	}
+
 	public override void Move()
 	{
 		m_NavMeshAgent.destination = m_Target.position;
