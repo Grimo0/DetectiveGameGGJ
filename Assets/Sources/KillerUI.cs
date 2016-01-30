@@ -14,19 +14,40 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	public void Initialize(Mission[] missions) {
-		mission0[0].sprite = missions[0].GetPart(0).sprite;
+		SetSprite(mission0[0], missions[0].GetPart(0));
 
-		mission1[0].sprite = missions[1].GetPart(0).sprite;
+		SetSprite(mission1[0], missions[1].GetPart(0));
 
-		mission2[0].sprite = missions[2].GetPart(0).sprite;
-		mission2[1].sprite = missions[2].GetPart(1).sprite;
+		SetSprite(mission2[0], missions[2].GetPart(0));
+		SetSprite(mission2[1], missions[2].GetPart(1));
 
-		mission3[0].sprite = missions[3].GetPart(0).sprite;
-		mission3[1].sprite = missions[3].GetPart(1).sprite;
+		SetSprite(mission3[0], missions[3].GetPart(0));
+		SetSprite(mission3[1], missions[3].GetPart(1));
 
-		mission4[0].sprite = missions[4].GetPart(0).sprite;
-		mission4[1].sprite = missions[4].GetPart(1).sprite;
-		mission4[2].sprite = missions[4].GetPart(2).sprite;
+		SetSprite(mission4[0], missions[4].GetPart(0));
+		SetSprite(mission4[1], missions[4].GetPart(1));
+		SetSprite(mission4[2], missions[4].GetPart(2));
+	}
+
+	private void SetSprite(SpriteRenderer renderer, CharacterPart part) {
+		renderer.sprite = part.sprite;
+		switch (part.category) {
+		case (CharacterPart.Category.HAT):
+			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 42f / part.sprite.pixelsPerUnit, 0);
+			break;
+
+		case (CharacterPart.Category.HEAD):
+			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 34f / part.sprite.pixelsPerUnit, 0);
+			break;
+
+		case (CharacterPart.Category.BODY):
+			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 20f / part.sprite.pixelsPerUnit, 0);
+			break;
+
+		case (CharacterPart.Category.PANT):
+			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 7f / part.sprite.pixelsPerUnit, 0);
+			break;
+		}
 	}
 	
 	void Update () {

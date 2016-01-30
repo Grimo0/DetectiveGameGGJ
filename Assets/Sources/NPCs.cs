@@ -59,10 +59,10 @@ public class NPCs : MonoBehaviour {
 			npcAppearance = GameObject.Instantiate(prefabNPC).GetComponent<Appearance>();
 			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
 			npcAppearance.Initialize(
-				_hats[Random.Range(0, _hats.Length - 1)],
-				_heads[Random.Range(0, _heads.Length - 1)],
-				_bodies[Random.Range(0, _bodies.Length - 1)],
-				_pants[Random.Range(0, _pants.Length - 1)]);
+				_hats[Random.Range(0, _hats.Length)],
+				_heads[Random.Range(0, _heads.Length)],
+				_bodies[Random.Range(0, _bodies.Length)],
+				_pants[Random.Range(0, _pants.Length)]);
 
 			level.AddCharacter(npcAppearance.transform);
 
