@@ -7,10 +7,17 @@ public class GameStart : MonoBehaviour {
     NPCs npcs;
     [SerializeField]
     KillerBehavior killerBehaviour;
+	[SerializeField]
+	Level level;
 
     void Start()
     {
         npcs.Initialize();
         killerBehaviour.Initialize();
+<<<<<<< HEAD
+=======
+		npcs.GenerateNPCs(killerBehaviour.Missions);
+		level.StartNPCBehaviours();
+>>>>>>> origin/master
     }
 }

@@ -4,6 +4,10 @@ using System.Collections;
 public class KillerKill : MonoBehaviour {
 
     Transform targetCharacter;
+	public AudioClip[] BruitageCri;
+	public AudioSource Source;
+
+	private IEnumerator DestroyCoroutine;
 
 	void OnTriggerEnter(Collider obj)
     {
@@ -37,13 +41,19 @@ public class KillerKill : MonoBehaviour {
         if(Input.GetButtonDown("Controller_Action") && targetCharacter != null)
         {
             Debug.Log("killer has killed " + targetCharacter.name);
-            StartCoroutine(DestroyNPC(targetCharacter.parent.gameObject));
+            
+			if (DestroyCoroutine == null) 
+			{
+				DestroyCoroutine = DestroyNPC (targetCharacter.parent.gameObject);
+				StartCoroutine (DestroyCoroutine);
+			}
         }
     }
 
     IEnumerator DestroyNPC(GameObject npc)
     {
         yield return new WaitForSeconds(3f);
+		Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
         Destroy(npc);
 		GameObject.Find("GameManager").GetComponent<NPCs>().npcs.Remove(npc.GetComponent<Appearance>());
 
@@ -54,5 +64,7 @@ public class KillerKill : MonoBehaviour {
         }
         else
             Debug.Log("wrong NPC");
+
+		DestroyCoroutine = null;
     }
 }

@@ -94,7 +94,7 @@ public class NPCs : MonoBehaviour {
 				MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
 				if (npcMoveToTarget != null)
 				{
-					//npcMoveToTarget.Init(killerBehavior, level);
+					npcMoveToTarget.Init(killerBehavior, level);
 				}
 
 				MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
