@@ -37,7 +37,13 @@ public class KillerKill : MonoBehaviour {
         if(Input.GetButtonDown("Fire2") && targetCharacter != null)
         {
             Debug.Log("killer has killed " + targetCharacter.name);
-            Destroy(targetCharacter.parent.gameObject);
+            StartCoroutine(DestroyNPC(targetCharacter.parent.gameObject));
         }
+    }
+
+    IEnumerator DestroyNPC(GameObject npc)
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(npc);
     }
 }
