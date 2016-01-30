@@ -6,6 +6,10 @@ public class Appearance : MonoBehaviour {
 	private CharacterPart[] parts;
 	public SpriteRenderer[] partsRenderer = new SpriteRenderer[4];
 
+	public CharacterPart[] Parts {
+		get { return this.parts; }
+	}
+
 
 	public void Initialize(CharacterPart[] parts) {
 		this.parts = parts;

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class NPCs : MonoBehaviour {
 	
@@ -12,6 +12,7 @@ public class NPCs : MonoBehaviour {
 
     public int nbrOfCharacters;
 
+	public List<Appearance> npcs;
     private CharacterPart[] _hats;
 	private CharacterPart[] _heads; 
 	private CharacterPart[] _bodies;
@@ -60,9 +61,11 @@ public class NPCs : MonoBehaviour {
 			_pants[i] = new CharacterPart(pantSprites[i], CharacterPart.Category.PANT, "");
 		}
 
+		GenerateNPCs();
 	}
 
-	public void GenerateNPCs(Mission[] missions) {
+	public void GenerateNPCs() {
+		npcs = new List<Appearance>();
 		Appearance npcAppearance;
 		CharacterPart[] parts;
 		for (int i = 0; i < nbrOfCharacters; i++)
@@ -82,13 +85,8 @@ public class NPCs : MonoBehaviour {
 			parts[3] = _pants[Random.Range(0, _pants.Length)];
 			npcAppearance.Initialize(parts);
 
-			if (i >= 1 && i <= missions.Length) {
-				for (int iP = 0; iP < missions[i - 1].Parts.Count; iP++) {
-					npcAppearance.SetPart(missions[i - 1].Parts[iP]);
-				}
-			}
-
 			level.AddCharacter(npcAppearance.transform);
+			npcs.Add(npcAppearance);
 
 			if(i > 0)
 			{

@@ -54,8 +54,7 @@ public class MoveToTarget : NPCBehaviour
 			Transform randomTarget = m_Level.GetRandomTarget();
 			npc = randomTarget.GetComponent<NPC>();
 
-			found = m_KillerBehaviour.IsATarget(npc) != -1;
-
+			found = m_KillerBehaviour.IsTarget(npc);
 			iter++;
 		}
 		while(!found && iter < max);
