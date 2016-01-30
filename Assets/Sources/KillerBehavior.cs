@@ -34,56 +34,64 @@ public class KillerBehavior : MonoBehaviour {
 
 		// MISSION 1
 		missions[1] = new Mission();
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0);
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[1].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
 		// MISSION 2
 		missions[2] = new Mission();
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0);
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[2].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0 || missions[2].HasCategory(parts[iPart][0]));
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[2].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
 		// MISSION 3
 		missions[3] = new Mission();
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0);
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[3].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0 || missions[3].HasCategory(parts[iPart][0]));
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[3].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
 		// MISSION 4
 		missions[4] = new Mission();
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0);
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[4].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0 || missions[4].HasCategory(parts[iPart][0]));
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[4].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
-		while (parts[iPart].Count <= 0)
+		do {
 			iPart = Random.Range(0, 4);
+		} while (parts[iPart].Count <= 0 || missions[4].HasCategory(parts[iPart][0]));
 		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[4].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
