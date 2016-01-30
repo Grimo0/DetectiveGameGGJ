@@ -12,5 +12,6 @@ public class GameStart : MonoBehaviour {
     {
         npcs.Initialize();
         killerBehaviour.Initialize();
+		npcs.GenerateNPCs(killerBehaviour.Missions);
     }
 }

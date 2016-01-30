@@ -5,10 +5,6 @@ public class KillerUI : MonoBehaviour {
 
 	public MissionUI[] missions = new MissionUI[5];
 
-
-	void Start () {
-	}
-
 	public void Initialize(Mission[] missions) {
 		this.missions[0].SetSprite(0, missions[0].Parts[0]);
 
@@ -27,12 +23,6 @@ public class KillerUI : MonoBehaviour {
 	
 	public void EndMission(int iMission) {
 		missions[iMission].fade();
-	}
-
-	void update() {
-		Debug.Log("EndMission" + 0);
-		if (Input.anyKeyDown)
-			EndMission(3);
 	}
 
 	private void SetSprite(SpriteRenderer renderer, CharacterPart part) {

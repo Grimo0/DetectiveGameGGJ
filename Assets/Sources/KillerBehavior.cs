@@ -6,6 +6,10 @@ public class KillerBehavior : MonoBehaviour {
 	private Mission[] missions;
 	public KillerUI killerUI;
 
+	public Mission[] Missions {
+		get { return this.missions; }
+	}
+
 	public void Initialize() {
 		GenerateMissions();
 		killerUI.Initialize(missions);
