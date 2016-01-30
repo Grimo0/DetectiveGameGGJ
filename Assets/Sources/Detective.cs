@@ -72,7 +72,7 @@ public class Detective : MonoBehaviour {
                 targetCharacter = null;
             }
 
-            if (Input.GetMouseButtonDown(0) && targetCharacter != null)
+            if (Input.GetButtonDown("Left_Click") && targetCharacter != null)
             {
                 if (targetCharacter.transform.parent.tag == "Player")
                     Debug.Log("You killed the killer");
@@ -95,7 +95,7 @@ public class Detective : MonoBehaviour {
 				targetDoor = null;
 			}
 
-			if (Input.GetMouseButtonDown(0) && targetDoor != null)
+			if (Input.GetButtonDown("Left_Click") && targetDoor != null)
 			{
 				targetDoor.Toggle();
 			}
