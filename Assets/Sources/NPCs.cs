@@ -9,6 +9,8 @@ public class NPCs : MonoBehaviour {
 
     public Transform charactersContainer;
 
+    public int nbrOfCharacters;
+
     private CharacterPart[] _hats;
 	private CharacterPart[] _heads; 
 	private CharacterPart[] _bodies;
@@ -57,7 +59,7 @@ public class NPCs : MonoBehaviour {
 		}
 
 		Appearance npcAppearance;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < nbrOfCharacters; i++)
         {
             if (i == 0)
                 npcAppearance = Instantiate(prefabKiller).GetComponent<Appearance>();
