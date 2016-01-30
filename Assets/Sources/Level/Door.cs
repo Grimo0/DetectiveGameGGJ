@@ -39,13 +39,13 @@ public class Door : MonoBehaviour
 
 	public void Open()
 	{
-		EnableObstacle(true);
+		EnableObstacle(false);
 		UpdateAgents();
 	}
 
 	public void Close()
 	{
-		EnableObstacle(false);
+		EnableObstacle(true);
 		UpdateAgents();
 	}
 
