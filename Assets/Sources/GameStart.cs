@@ -14,10 +14,6 @@ public class GameStart : MonoBehaviour {
     {
         npcs.Initialize();
         killerBehaviour.Initialize();
-<<<<<<< HEAD
-=======
-		npcs.GenerateNPCs(killerBehaviour.Missions);
 		level.StartNPCBehaviours();
->>>>>>> origin/master
     }
 }
