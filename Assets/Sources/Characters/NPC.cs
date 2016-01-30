@@ -16,6 +16,20 @@ public class NPC : MonoBehaviour
 		m_NPCBehaviours[randomBehaviourIndex].Move();
 	}
 
+	public T FindBehaviour<T>() where T : NPCBehaviour
+	{
+		for (int i = 0; i < m_NPCBehaviours.Length; i++)
+		{
+			T currentBehaviour = m_NPCBehaviours[i] as T;
+			if (currentBehaviour != null)
+			{
+				return currentBehaviour;
+			}
+		}
+
+		return null;
+	}
+
 	public MoveToTarget GetMoveToTarget()
 	{
 		//quickly get a move to target script and assing target (if any)
