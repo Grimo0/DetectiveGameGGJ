@@ -27,7 +27,7 @@ public class Door : MonoBehaviour
 		if (m_Close)
 		{
 			Close();
-			m_Open = false;
+			m_Close = false;
 		}
 	}
 
@@ -39,13 +39,13 @@ public class Door : MonoBehaviour
 
 	public void Open()
 	{
-		m_NavMeshObstacle.carving = false;
+		EnableObstacle(true);
 		UpdateAgents();
 	}
 
 	public void Close()
 	{
-		m_NavMeshObstacle.carving = true;
+		EnableObstacle(false);
 		UpdateAgents();
 	}
 
@@ -55,5 +55,11 @@ public class Door : MonoBehaviour
 		{
 			m_NPCBehaviours[i].Refresh();
 		}
+	}
+
+	private void EnableObstacle(bool isEnabled)
+	{
+		m_NavMeshObstacle.carving = isEnabled;
+		m_NavMeshObstacle.enabled = isEnabled;
 	}
 }
