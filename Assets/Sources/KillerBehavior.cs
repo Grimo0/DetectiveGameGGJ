@@ -97,7 +97,7 @@ public class KillerBehavior : MonoBehaviour {
 	/**
 	 * Return the mission index.
 	 **/
-	public int isATarget(NPC npc) {
+	public int IsATarget(NPC npc) {
 		Appearance appearance = npc.GetComponent<Appearance>();
 		int iP;
 		for (int iM = 0; iM < missions.Length; iM++) {
@@ -106,6 +106,7 @@ public class KillerBehavior : MonoBehaviour {
 				if (!appearance.HasPart(missions[iM].Parts[iP])) break;
 			}
 			if (iP < missions[iM].Parts.Count) continue;
+			missions[iM].Finished = true;
 			return iM;
 		}
 		return -1;
