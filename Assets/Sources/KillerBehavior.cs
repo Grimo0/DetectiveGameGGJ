@@ -7,6 +7,11 @@ public class KillerBehavior : MonoBehaviour {
 
 	void Start () {
 		missions = new Mission[5];
+		for(int i = 0; i < missions.Length; i++)
+		{
+			missions[i] = new Mission();	
+		}
+
 		GenerateMissions();
 	}
 
