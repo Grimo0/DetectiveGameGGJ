@@ -3,11 +3,13 @@ using System.Collections;
 
 public class NPCs : MonoBehaviour {
 	
-	public GameObject prefabNPC;
+	public GameObject prefabNPC, prefabKiller;
 
 	public Level level;
 
-	private CharacterPart[] _hats;
+    public Transform charactersContainer;
+
+    private CharacterPart[] _hats;
 	private CharacterPart[] _heads; 
 	private CharacterPart[] _bodies;
 	private CharacterPart[] _pants;
@@ -55,9 +57,16 @@ public class NPCs : MonoBehaviour {
 		}
 
 		Appearance npcAppearance;
-		for (int i = 0; i < 50; i++) {
-			npcAppearance = GameObject.Instantiate(prefabNPC).GetComponent<Appearance>();
-			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
+		for (int i = 0; i < 50; i++)
+        {
+            if (i == 0)
+                npcAppearance = Instantiate(prefabKiller).GetComponent<Appearance>();
+            else
+                npcAppearance = Instantiate(prefabNPC).GetComponent<Appearance>();
+
+            npcAppearance.transform.parent = charactersContainer;
+            
+            npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
 			npcAppearance.Initialize(
 				_hats[Random.Range(0, _hats.Length - 1)],
 				_heads[Random.Range(0, _heads.Length - 1)],
@@ -66,25 +75,24 @@ public class NPCs : MonoBehaviour {
 
 			level.AddCharacter(npcAppearance.transform);
 
-			NPC npc = npcAppearance.GetComponent<NPC>();
-			MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
-			if (npcMoveToTarget != null)
-			{
-				level.SetTargetKiller(npcMoveToTarget);
-			}
+            if(i > 0)
+            {
+                NPC npc = npcAppearance.GetComponent<NPC>();
+                MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
+                if (npcMoveToTarget != null)
+                {
+                    level.SetTargetKiller(npcMoveToTarget);
+                }
 
-			MoveToWaypoints npcMoveToWaypoints = npc.GetMoveToWaypoints();
-			if (npcMoveToWaypoints != null)
-			{
-				level.SetRandomPath(npcMoveToWaypoints);
-			}
+                MoveToWaypoints npcMoveToWaypoints = npc.GetMoveToWaypoints();
+                if (npcMoveToWaypoints != null)
+                {
+                    level.SetRandomPath(npcMoveToWaypoints);
+                }
 
-			//start NPC
-			npc.StartBehaviour();
+                //start NPC
+                npc.StartBehaviour();
+            }
 		}
-	}
-
-	void Update() {
-	
 	}
 }
