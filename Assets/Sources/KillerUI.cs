@@ -29,30 +29,7 @@ public class KillerUI : MonoBehaviour {
 		missions[iMission].fade();
 	}
 
-	void update() {
-		Debug.Log("EndMission" + 0);
-		if (Input.anyKeyDown)
-			EndMission(3);
+	void Update() {
 	}
 
-	private void SetSprite(SpriteRenderer renderer, CharacterPart part) {
-		renderer.sprite = part.sprite;
-		switch (part.category) {
-		case (CharacterPart.Category.HAT):
-			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 42f / part.sprite.pixelsPerUnit, 0);
-			break;
-
-		case (CharacterPart.Category.HEAD):
-			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 34f / part.sprite.pixelsPerUnit, 0);
-			break;
-
-		case (CharacterPart.Category.BODY):
-			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 20f / part.sprite.pixelsPerUnit, 0);
-			break;
-
-		case (CharacterPart.Category.PANT):
-			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 7f / part.sprite.pixelsPerUnit, 0);
-			break;
-		}
-	}
 }

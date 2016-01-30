@@ -8,7 +8,6 @@ public class MissionUI {
 	private float time = -1f;
 
 	void Start () {
-	
 	}
 
 	public void SetSprite(int iPart, CharacterPart part) {
