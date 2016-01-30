@@ -9,16 +9,22 @@ public class NPC : MonoBehaviour
 	[SerializeField]
 	private NPCBehaviour[] m_NPCBehaviours;
 
-	private void Start()
-	{
-		StartBehaviour();
-	}
-
 	//called from NPCBehaviour OnCompleted callback
 	public void StartBehaviour()
 	{
 		int randomBehaviourIndex = PickBehaviour();
 		m_NPCBehaviours[randomBehaviourIndex].Move();
+	}
+
+	public MoveToTarget GetMoveToTarget()
+	{
+		//quickly get a move to target script and assing target (if any)
+		return GetComponent<MoveToTarget>();
+	}
+
+	public MoveToWaypoints GetMoveToWaypoints()
+	{
+		return GetComponent<MoveToWaypoints>();	
 	}
 
 	private int PickBehaviour()

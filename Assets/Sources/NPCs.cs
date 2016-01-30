@@ -4,6 +4,9 @@ using System.Collections;
 public class NPCs : MonoBehaviour {
 	
 	public GameObject prefabNPC;
+
+	public Level level;
+
 	private CharacterPart[] _hats;
 	private CharacterPart[] _heads; 
 	private CharacterPart[] _bodies;
@@ -60,6 +63,24 @@ public class NPCs : MonoBehaviour {
 				_heads[Random.Range(0, _heads.Length - 1)],
 				_bodies[Random.Range(0, _bodies.Length - 1)],
 				_pants[Random.Range(0, _pants.Length - 1)]);
+
+			level.AddCharacter(npcAppearance.transform);
+
+			NPC npc = npcAppearance.GetComponent<NPC>();
+			MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
+			if (npcMoveToTarget != null)
+			{
+				level.SetTargetKiller(npcMoveToTarget);
+			}
+
+			MoveToWaypoints npcMoveToWaypoints = npc.GetMoveToWaypoints();
+			if (npcMoveToWaypoints != null)
+			{
+				level.SetRandomPath(npcMoveToWaypoints);
+			}
+
+			//start NPC
+			npc.StartBehaviour();
 		}
 	}
 
