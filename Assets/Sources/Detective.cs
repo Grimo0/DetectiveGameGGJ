@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Detective : MonoBehaviour {
 
+    [SerializeField]
+    LayerMask layer;
+
     private bool shootMode;
     public bool ShootMode
     {
@@ -36,11 +39,11 @@ public class Detective : MonoBehaviour {
     {
         if (ShootMode)
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, layer))
             {
                 if (hit.collider != null)
                 {
-                    if (hit.transform.tag == "SelectionCollider")
+                    if (hit.collider.transform.tag == "SelectionCollider")
                     {
                         if (targetCharacter != null)
                         {
