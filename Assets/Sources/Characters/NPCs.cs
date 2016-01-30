@@ -74,7 +74,7 @@ public class NPCs : MonoBehaviour {
 
 			npcAppearance.transform.parent = charactersContainer;
 
-			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
+			npcAppearance.transform.position = new Vector3(Random.Range(-40f, 40f), 1f, Random.Range(-20f, 20f));
 			parts = new CharacterPart[4];
 			parts[0] = _hats[Random.Range(0, _hats.Length)];
 			parts[1] = _heads[Random.Range(0, _heads.Length)];
