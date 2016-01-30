@@ -26,8 +26,8 @@ public class KillerUI : MonoBehaviour {
 		}
 	}
 
-	public void EndMission() {
+	public void EndMission(int ritualNumber) {
 		time = 1f;
-
+		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 	}
 }
