@@ -55,13 +55,12 @@ public class KillerKill : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 		Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
         Destroy(npc);
+		GameObject.Find("GameManager").GetComponent<NPCs>().npcs.Remove(npc.GetComponent<Appearance>());
 
-        int isATarget = GameObject.Find("GameManager").GetComponent<KillerBehavior>().IsATarget(npc.GetComponent<NPC>());
-
-        if (isATarget >= 0)
+		KillerBehavior killerBehavior = GameObject.Find("GameManager").GetComponent<KillerBehavior>();
+		if (killerBehavior.Kill(npc.GetComponent<NPC>()))
         {
-            GameObject.Find("KillerUI").GetComponent<KillerUI>().EndMission(isATarget);
-            Debug.Log("mission "+ isATarget + " achieved");
+			Debug.Log("mission "+ killerBehavior.RitualNumber + " achieved");
         }
         else
             Debug.Log("wrong NPC");

@@ -16,11 +16,12 @@ public class Mission {
 	}
 
 
-	public void AddPart(CharacterPart part) {
+	public bool AddPart(CharacterPart part) {
 		if (HasCategory(part))
-			return;
+			return false;
 
 		_parts.Add(part);
+		return true;
 	}
 
 	public bool HasCategory(CharacterPart part) {
