@@ -71,7 +71,10 @@ public class Detective : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0) && targetCharacter != null)
             {
-                //Kill character, detective win or lose the game
+                if (targetCharacter.tag == "Player")
+                    Debug.Log("You killed the killer");
+                else
+                    Debug.Log("You lose");
             }
         }
 	}
