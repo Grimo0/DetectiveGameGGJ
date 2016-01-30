@@ -5,6 +5,10 @@ public class Detective : MonoBehaviour {
     
 	public LayerMask layer;
 
+	public AudioClip Shoot;
+	public AudioClip ReloadGun;
+	public AudioSource Source;
+
     private bool shootMode;
     public bool ShootMode
     {
@@ -15,6 +19,7 @@ public class Detective : MonoBehaviour {
             if (shootMode)
             {
                 Cursor.SetCursor(cursorTarget, Vector2.one * 16f, CursorMode.Auto);
+				Source.PlayOneShot (ReloadGun);
             }
             else
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
