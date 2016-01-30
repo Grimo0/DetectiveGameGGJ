@@ -34,7 +34,8 @@ public class NPCs : MonoBehaviour {
 		get { return this._pants; }
 	}
 
-	void Start() {
+	public void Initialize()
+    {
 		Sprite[] hatSprites = Resources.LoadAll<Sprite>("Sprites/characters/hats");
 		_hats = new CharacterPart[hatSprites.Length];
 		for (int i = 0; i < hatSprites.Length; i++) {
@@ -59,34 +60,44 @@ public class NPCs : MonoBehaviour {
 			_pants[i] = new CharacterPart(pantSprites[i], CharacterPart.Category.PANT, "");
 		}
 
-		Appearance npcAppearance;
-		for (int i = 0; i < nbrOfCharacters; i++)
-        {
-            if (i == 0)
-                npcAppearance = Instantiate(prefabKiller).GetComponent<Appearance>();
-            else
-                npcAppearance = Instantiate(prefabNPC).GetComponent<Appearance>();
+	}
 
-            npcAppearance.transform.parent = charactersContainer;
-            
-            npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
-			npcAppearance.Initialize(
-				_hats[Random.Range(0, _hats.Length)],
-				_heads[Random.Range(0, _heads.Length)],
-				_bodies[Random.Range(0, _bodies.Length)],
-				_pants[Random.Range(0, _pants.Length)]);
+	public void GenerateNPCs(Mission[] missions) {
+		Appearance npcAppearance;
+		CharacterPart[] parts;
+		for (int i = 0; i < nbrOfCharacters; i++)
+		{
+			if (i == 0)
+				npcAppearance = Instantiate(prefabKiller).GetComponent<Appearance>();
+			else
+				npcAppearance = Instantiate(prefabNPC).GetComponent<Appearance>();
+
+			npcAppearance.transform.parent = charactersContainer;
+
+			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
+			parts = new CharacterPart[4];
+			parts[0] = _hats[Random.Range(0, _hats.Length)];
+			parts[1] = _heads[Random.Range(0, _heads.Length)];
+			parts[2] = _bodies[Random.Range(0, _bodies.Length)];
+			parts[3] = _pants[Random.Range(0, _pants.Length)];
+			npcAppearance.Initialize(parts);
+
+			if (i >= 1 && i <= missions.Length) {
+				for (int iP = 0; iP < missions[i - 1].Parts.Count; iP++) {
+					npcAppearance.SetPart(missions[i - 1].Parts[iP]);
+				}
+			}
 
 			level.AddCharacter(npcAppearance.transform);
 
-            if(i > 0)
-            {
-                NPC npc = npcAppearance.GetComponent<NPC>();
-                MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
-                if (npcMoveToTarget != null)
-                {
-                    //level.SetTargetKiller(npcMoveToTarget);
+			if(i > 0)
+			{
+				NPC npc = npcAppearance.GetComponent<NPC>();
+				MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
+				if (npcMoveToTarget != null)
+				{
 					//npcMoveToTarget.Init(killerBehavior, level);
-                }
+				}
 
 				MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
 				if (npcMoveToWaypoints != null)

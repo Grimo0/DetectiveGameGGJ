@@ -34,7 +34,7 @@ public class KillerKill : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire2") && targetCharacter != null)
+        if(Input.GetButtonDown("Controller_Action") && targetCharacter != null)
         {
             Debug.Log("killer has killed " + targetCharacter.name);
             StartCoroutine(DestroyNPC(targetCharacter.parent.gameObject));
@@ -43,7 +43,17 @@ public class KillerKill : MonoBehaviour {
 
     IEnumerator DestroyNPC(GameObject npc)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         Destroy(npc);
+
+        int isATarget = GameObject.Find("GameManager").GetComponent<KillerBehavior>().IsATarget(npc.GetComponent<NPC>());
+
+        if (isATarget >= 0)
+        {
+            GameObject.Find("KillerUI").GetComponent<KillerUI>().EndMission(isATarget);
+            Debug.Log("mission "+ isATarget + " achieved");
+        }
+        else
+            Debug.Log("wrong NPC");
     }
 }

@@ -17,7 +17,8 @@ public class Mission {
 
 
 	public void AddPart(CharacterPart part) {
-		HasCategory(part);
+		if (HasCategory(part))
+			return;
 
 		_parts.Add(part);
 	}
