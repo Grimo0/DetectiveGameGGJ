@@ -16,23 +16,6 @@ public class Appearance : MonoBehaviour {
 	public SpriteRenderer pantRenderer;
 
 
-	public CharacterPart Hat {
-		get { return this._hat; }
-	}
-
-	public CharacterPart Head {
-		get { return this._head; }
-	}
-
-	public CharacterPart Body {
-		get { return this._body; }
-	}
-
-	public CharacterPart Pant {
-		get { return this._pant; }
-	}
-
-
 	// Use this for initialization
 	void Start() {
 		
@@ -55,5 +38,9 @@ public class Appearance : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 	
+	}
+
+	public bool HasPart(CharacterPart part) {
+		return part == _hat || part == _head || part == _body || part == _pant;
 	}
 }

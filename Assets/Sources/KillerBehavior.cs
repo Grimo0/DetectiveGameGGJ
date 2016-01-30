@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class KillerBehavior : MonoBehaviour {
 	
@@ -19,68 +19,90 @@ public class KillerBehavior : MonoBehaviour {
 		missions = new Mission[5];
 
 		NPCs npcs = GetComponent<NPCs>();
-		CharacterPart[][] parts = new CharacterPart[4][];
-		parts[0] = npcs.Hats;
-		parts[1] = npcs.Heads;
-		parts[2] = npcs.Bodies;
-		parts[3] = npcs.Pants;
+		List<CharacterPart>[] parts = new List<CharacterPart>[4];
+		parts[0] = new List<CharacterPart>(npcs.Hats);
+		parts[1] = new List<CharacterPart>(npcs.Heads);
+		parts[2] = new List<CharacterPart>(npcs.Bodies);
+		parts[3] = new List<CharacterPart>(npcs.Pants);
 
-		// 1 RULE RITUAL
+		// MISSION 0
 		missions[0] = new Mission();
 		int iPart = Random.Range(0, 4);
-		CharacterPart part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		missions[0].AddPart(part);
+		int iNumber = Random.Range(0, parts[iPart].Count);
+		missions[0].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 
+		// MISSION 1
 		missions[1] = new Mission();
-		while (missions[0].Contain(part)) {
+		while (parts[iPart].Count <= 0)
 			iPart = Random.Range(0, 4);
-			part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		}
-		missions[1].AddPart(part);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[1].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 
-		// 2 RULES RITUAL
+		// MISSION 2
 		missions[2] = new Mission();
-		iPart = Random.Range(0, 4);
-		part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		missions[2].AddPart(part);
-
-		while (missions[2].Contain(part)) {
+		while (parts[iPart].Count <= 0)
 			iPart = Random.Range(0, 4);
-			part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		}
-		missions[2].AddPart(part);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[2].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 
+		while (parts[iPart].Count <= 0)
+			iPart = Random.Range(0, 4);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[2].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
+
+		// MISSION 3
 		missions[3] = new Mission();
-		iPart = Random.Range(0, 4);
-		part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		missions[3].AddPart(part);
-
-		while (missions[3].Contain(part) || (missions[2].Contain(missions[3].GetPart(0)) && missions[2].Contain(part))) {
+		while (parts[iPart].Count <= 0)
 			iPart = Random.Range(0, 4);
-			part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		}
-		missions[3].AddPart(part);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[3].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 
-		// 3 RULES RITUAL
+		while (parts[iPart].Count <= 0)
+			iPart = Random.Range(0, 4);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[3].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
+
+		// MISSION 4
 		missions[4] = new Mission();
-		iPart = Random.Range(0, 4);
-		part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		missions[4].AddPart(part);
-
-		while (missions[4].Contain(part)) {
+		while (parts[iPart].Count <= 0)
 			iPart = Random.Range(0, 4);
-			part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		}
-		missions[4].AddPart(part);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[4].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 
-		while (missions[4].Contain(part)) {
+		while (parts[iPart].Count <= 0)
 			iPart = Random.Range(0, 4);
-			part = parts[iPart][Random.Range(0, parts[iPart].Length)];
-		}
-		missions[4].AddPart(part);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[4].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
+
+		while (parts[iPart].Count <= 0)
+			iPart = Random.Range(0, 4);
+		iNumber = Random.Range(0, parts[iPart].Count);
+		missions[4].AddPart(parts[iPart][iNumber]);
+		parts[iPart].RemoveAt(iNumber);
 	}
-	
-	void Update () {
-	
+
+	/**
+	 * Return the mission index.
+	 **/
+	public int isATarget(NPC npc) {
+		Appearance appearance = npc.GetComponent<Appearance>();
+		int iP;
+		for (int iM = 0; iM < missions.Length; iM++) {
+			if (missions[iM].Finished) continue;
+			for (iP = 0; iP < missions[iM].Parts.Count; iP++) {
+				if (!appearance.HasPart(missions[iM].Parts[iP])) break;
+			}
+			if (iP < missions[iM].Parts.Count) continue;
+			return iM;
+		}
+		return -1;
 	}
 }

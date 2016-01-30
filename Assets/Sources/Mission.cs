@@ -3,20 +3,29 @@ using System.Collections.Generic;
 
 public class Mission {
 
-	private List<CharacterPart> parts = new List<CharacterPart>();
+	private bool _finished = false;
+	private List<CharacterPart> _parts = new List<CharacterPart>();
+
+	public bool Finished {
+		get { return this._finished; }
+		set { _finished = value; }
+	}
+
+	public List<CharacterPart> Parts {
+		get { return this._parts; }
+	}
 
 
 	public void AddPart(CharacterPart part) {
-		Contain(part);
+		HasCategory(part);
 
-		parts.Add(part);
+		_parts.Add(part);
 	}
 
-	public CharacterPart GetPart(int i) {
-		return parts[i];
-	}
-
-	public bool Contain(CharacterPart part) {
-		return parts.Contains(part);
+	public bool HasCategory(CharacterPart part) {
+		for (int i = 0; i < _parts.Count; i++) {
+			if (part.category == _parts[i].category) return true;
+		}
+		return false;
 	}
 }

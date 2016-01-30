@@ -3,30 +3,36 @@ using System.Collections;
 
 public class KillerUI : MonoBehaviour {
 
-	public SpriteRenderer[] mission0;
-	public SpriteRenderer[] mission1;
-	public SpriteRenderer[] mission2;
-	public SpriteRenderer[] mission3;
-	public SpriteRenderer[] mission4;
+	public MissionUI[] missions = new MissionUI[5];
 
 
 	void Start () {
 	}
 
 	public void Initialize(Mission[] missions) {
-		SetSprite(mission0[0], missions[0].GetPart(0));
+		this.missions[0].SetSprite(0, missions[0].Parts[0]);
 
-		SetSprite(mission1[0], missions[1].GetPart(0));
+		this.missions[1].SetSprite(0, missions[1].Parts[0]);
 
-		SetSprite(mission2[0], missions[2].GetPart(0));
-		SetSprite(mission2[1], missions[2].GetPart(1));
+		this.missions[2].SetSprite(0, missions[2].Parts[0]);
+		this.missions[2].SetSprite(1, missions[2].Parts[1]);
 
-		SetSprite(mission3[0], missions[3].GetPart(0));
-		SetSprite(mission3[1], missions[3].GetPart(1));
+		this.missions[3].SetSprite(0, missions[3].Parts[0]);
+		this.missions[3].SetSprite(1, missions[3].Parts[1]);
 
-		SetSprite(mission4[0], missions[4].GetPart(0));
-		SetSprite(mission4[1], missions[4].GetPart(1));
-		SetSprite(mission4[2], missions[4].GetPart(2));
+		this.missions[4].SetSprite(0, missions[4].Parts[0]);
+		this.missions[4].SetSprite(1, missions[4].Parts[1]);
+		this.missions[4].SetSprite(2, missions[4].Parts[2]);
+	}
+	
+	public void EndMission(int iMission) {
+		missions[iMission].fade();
+	}
+
+	void update() {
+		Debug.Log("EndMission" + 0);
+		if (Input.anyKeyDown)
+			EndMission(3);
 	}
 
 	private void SetSprite(SpriteRenderer renderer, CharacterPart part) {
@@ -48,9 +54,5 @@ public class KillerUI : MonoBehaviour {
 			renderer.transform.localPosition = new Vector3(renderer.transform.localPosition.x, renderer.transform.localPosition.y - 7f / part.sprite.pixelsPerUnit, 0);
 			break;
 		}
-	}
-	
-	void Update () {
-	
 	}
 }
