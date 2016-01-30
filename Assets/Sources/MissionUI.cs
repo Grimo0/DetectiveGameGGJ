@@ -9,10 +9,6 @@ public class MissionUI {
 
 	private float time = -1f;
 
-	void Start () {
-	
-	}
-
 	public void SetSprite(int iPart, CharacterPart part) {
 		mission[iPart].sprite = part.sprite;
 		/*switch (part.category) {

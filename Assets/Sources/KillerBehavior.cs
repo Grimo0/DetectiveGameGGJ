@@ -110,8 +110,19 @@ public class KillerBehavior : MonoBehaviour {
 			}
 			if (iP < missions[iM].Parts.Count) continue;
 			missions[iM].Finished = true;
+            CheckWin();
 			return iM;
 		}
 		return -1;
 	}
+
+    void CheckWin()
+    {
+        foreach(Mission mission in missions)
+        {
+            if (!mission.Finished)
+                return;
+        }
+        GetComponent<EndGame>().KillerWins();
+    }
 }

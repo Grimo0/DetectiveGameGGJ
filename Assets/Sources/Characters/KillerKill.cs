@@ -43,7 +43,7 @@ public class KillerKill : MonoBehaviour {
 
     IEnumerator DestroyNPC(GameObject npc)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         Destroy(npc);
 
         int isATarget = GameObject.Find("GameManager").GetComponent<KillerBehavior>().IsATarget(npc.GetComponent<NPC>());
