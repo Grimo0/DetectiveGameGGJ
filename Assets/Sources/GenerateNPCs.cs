@@ -18,7 +18,6 @@ public class GenerateNPCs : MonoBehaviour {
 		Appearance npcAppearance;
 		for (int i = 0; i < 50; i++) {
 			npcAppearance = GameObject.Instantiate(prefabNPC).GetComponent<Appearance>();
-			//npcAppearance.transform.localScale = new Vector3(10f, 1f, 10f);
 			npcAppearance.transform.Rotate(new Vector3(90f, 0f, 0f));
 			npcAppearance.transform.position = new Vector3(Random.Range(-25f, 25f), 1f, Random.Range(-25f, 25f));
 			npcAppearance.Initialize(
