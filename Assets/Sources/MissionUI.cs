@@ -8,6 +8,7 @@ public class MissionUI {
 	private float time = -1f;
 
 	void Start () {
+	
 	}
 
 	public void SetSprite(int iPart, CharacterPart part) {
@@ -31,16 +32,13 @@ public class MissionUI {
 		}
 	}
 	
-	public void Update() {
-		if (time > 0f) {
+	void Update () {
+		if (time > 0) {
 			time -= Time.deltaTime;
-			Color c = mission[0].color;
+			Color c = mission[0].material.color;
 			c.a = Mathf.Lerp(0f, 1f, time);
-			if (time < 0f)
+			if (time < 0)
 				c.a = 0;
-			for (int i = 0; i < mission.Length; i++) {
-				mission[i].color = c;
-			}
 		}
 	}
 

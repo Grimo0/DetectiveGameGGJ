@@ -6,7 +6,7 @@ public class KillerBehavior : MonoBehaviour {
 	private Mission[] missions;
 	public KillerUI killerUI;
 
-	private void Start() {
+	void Start () {
 		Initialize();
 	}
 
@@ -92,7 +92,7 @@ public class KillerBehavior : MonoBehaviour {
 	/**
 	 * Return the mission index.
 	 **/
-	public int IsATarget(NPC npc) {
+	public int isATarget(NPC npc) {
 		Appearance appearance = npc.GetComponent<Appearance>();
 		int iP;
 		for (int iM = 0; iM < missions.Length; iM++) {
