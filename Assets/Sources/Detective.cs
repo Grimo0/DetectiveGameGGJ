@@ -37,6 +37,7 @@ public class Detective : MonoBehaviour {
 	void Update()
     {
 		bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, layer); 
+
 		if (ShootMode)
         {
 			if (isHit)
@@ -88,16 +89,22 @@ public class Detective : MonoBehaviour {
 				{
 					//find door
 					targetDoor = hit.collider.GetComponent<Door>();
+					targetDoor.Hover();
 				}
 			}
 			else
 			{
+				if (targetDoor != null)
+				{
+					targetDoor.HoverOut();
+				}
+
 				targetDoor = null;
 			}
 
 			if (Input.GetMouseButtonDown(0) && targetDoor != null)
 			{
-				targetDoor.Toggle();
+				targetDoor.Close();
 			}
 
 		}

@@ -6,7 +6,9 @@ public class ShootModeUI : MonoBehaviour {
     [SerializeField]
     Detective detective;
     [SerializeField]
-    Sprite shootModeON, shootModeOFF;
+	Sprite shootModeON;
+	[SerializeField]
+	Sprite shootModeOFF;
 
     bool shootMode = false;
 
