@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class Detective : MonoBehaviour {
-
-    [SerializeField]
-    LayerMask layer;
+    
+	public LayerMask layer;
 
     private bool shootMode;
     public bool ShootMode
@@ -75,7 +74,7 @@ public class Detective : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0) && targetCharacter != null)
             {
-                if (targetCharacter.tag == "Player")
+                if (targetCharacter.transform.parent.tag == "Player")
                     Debug.Log("You killed the killer");
                 else
                     Debug.Log("You lose");
