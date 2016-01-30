@@ -46,7 +46,7 @@ public class KillerKill : MonoBehaviour {
         yield return new WaitForSeconds(5f);
         Destroy(npc);
 
-        int isATarget = GameObject.Find("GameManager").GetComponent<KillerBehavior>().isATarget(npc.GetComponent<NPC>());
+        int isATarget = GameObject.Find("GameManager").GetComponent<KillerBehavior>().IsATarget(npc.GetComponent<NPC>());
 
         if (isATarget >= 0)
         {

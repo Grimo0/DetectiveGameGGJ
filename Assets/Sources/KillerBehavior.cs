@@ -22,10 +22,13 @@ public class KillerBehavior : MonoBehaviour {
 		parts[2] = new List<CharacterPart>(npcs.Bodies);
 		parts[3] = new List<CharacterPart>(npcs.Pants);
 
+		int iPart;
+		int iNumber;
+
 		// MISSION 0
 		missions[0] = new Mission();
-		int iPart = Random.Range(0, 4);
-		int iNumber = Random.Range(0, parts[iPart].Count);
+		iPart = Random.Range(0, 4);
+		iNumber = Random.Range(0, parts[iPart].Count);
 		missions[0].AddPart(parts[iPart][iNumber]);
 		parts[iPart].RemoveAt(iNumber);
 
@@ -100,7 +103,7 @@ public class KillerBehavior : MonoBehaviour {
 	public int IsATarget(NPC npc) {
 		Appearance appearance = npc.GetComponent<Appearance>();
 		int iP;
-		for (int iM = 0; iM < missions.Length; iM++) {
+		for (int iM = missions.Length - 1; iM >= 0; iM--) {
 			if (missions[iM].Finished) continue;
 			for (iP = 0; iP < missions[iM].Parts.Count; iP++) {
 				if (!appearance.HasPart(missions[iM].Parts[iP])) break;
