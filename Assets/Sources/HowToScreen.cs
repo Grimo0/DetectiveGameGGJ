@@ -12,7 +12,11 @@ public class HowToScreen : MonoBehaviour {
 	}
 	
 	void Update () {
-		if ((Input.GetButton("Controller_Action") || Input.GetKey(KeyCode.Space)) && Input.GetButton("Left_Click"))
+		if (Input.GetButtonDown("Controller_Action") || Input.GetKeyDown(KeyCode.Space))
+			killerPressed = true;
+		if (Input.GetButtonDown("Left_Click"))
+			detectivePressed = true;
+		if (killerPressed && detectivePressed)
 			SceneManager.LoadScene("Scenes/Game");
 	}
 }
