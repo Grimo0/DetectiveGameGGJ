@@ -41,9 +41,12 @@ public class MoveToTarget : NPCBehaviour
 
 	private Transform FindKillerTarget()
 	{
-		Transform result = null;
+		Transform result = transform;
 
 		NPC npc;
+
+		//try 50 times then just go away
+		int iter = 0, max = 50;
 
 		bool found = false;
 		do
@@ -52,8 +55,10 @@ public class MoveToTarget : NPCBehaviour
 			npc = randomTarget.GetComponent<NPC>();
 
 			found = m_KillerBehaviour.IsATarget(npc) != -1;
+
+			iter++;
 		}
-		while(!found);
+		while(!found && iter < max);
 
 		if (found)
 		{
