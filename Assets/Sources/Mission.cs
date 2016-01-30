@@ -5,11 +5,9 @@ public class Mission {
 
 	private List<CharacterPart> parts = new List<CharacterPart>();
 
+
 	public void AddPart(CharacterPart part) {
-		for (int i = 0; i < parts.Count; i++) {
-			if (parts[0].category == part.category)
-				return;
-		}
+		Contain(part);
 
 		parts.Add(part);
 	}
@@ -18,7 +16,7 @@ public class Mission {
 		return parts[i];
 	}
 
-	public bool Contain(CharacterPart rule) {
-		return parts.Contains(rule);
+	public bool Contain(CharacterPart part) {
+		return parts.Contains(part);
 	}
 }

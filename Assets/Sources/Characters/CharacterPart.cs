@@ -20,5 +20,26 @@ public class CharacterPart {
 	public Sprite sprite { get{ return _sprite;} }
 	public Category category { get{ return _category;} set{ _category = value;} }
 	public string name { get{ return _name;} set{ _name = value;} }
+
+	public override bool Equals(object obj)
+	{
+		if (obj == null)
+			return false;
+		if (ReferenceEquals(this, obj))
+			return true;
+		if (obj.GetType() != typeof(CharacterPart))
+			return false;
+		CharacterPart other = (CharacterPart)obj;
+		return _category == other._category && _name == other._name && category == other.category && name == other.name;
+	}
+	
+
+	public override int GetHashCode()
+	{
+		unchecked {
+			return _category.GetHashCode() ^ (_name != null ? _name.GetHashCode() : 0) ^ category.GetHashCode() ^ (name != null ? name.GetHashCode() : 0);
+		}
+	}
+	
 }
 
