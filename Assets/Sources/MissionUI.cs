@@ -5,6 +5,8 @@ using System.Collections;
 public class MissionUI {
 
 	public SpriteRenderer[] mission;
+    public SpriteRenderer DONE;
+
 	private float time = -1f;
 
 	void Start () {
@@ -13,7 +15,7 @@ public class MissionUI {
 
 	public void SetSprite(int iPart, CharacterPart part) {
 		mission[iPart].sprite = part.sprite;
-		switch (part.category) {
+		/*switch (part.category) {
 		case (CharacterPart.Category.HAT):
 			mission[iPart].transform.localPosition = new Vector3(mission[iPart].transform.localPosition.x, mission[iPart].transform.localPosition.y - 42f / part.sprite.pixelsPerUnit, 0);
 			break;
@@ -29,7 +31,7 @@ public class MissionUI {
 		case (CharacterPart.Category.PANT):
 			mission[iPart].transform.localPosition = new Vector3(mission[iPart].transform.localPosition.x, mission[iPart].transform.localPosition.y - 7f / part.sprite.pixelsPerUnit, 0);
 			break;
-		}
+		}*/
 	}
 	
 	void Update () {
@@ -44,5 +46,6 @@ public class MissionUI {
 
 	public void fade() {
 		time = 1f;
+        DONE.enabled = true;
 	}
 }
