@@ -31,13 +31,16 @@ public class MissionUI {
 		}
 	}
 	
-	void Update () {
-		if (time > 0) {
+	public void Update() {
+		if (time > 0f) {
 			time -= Time.deltaTime;
-			Color c = mission[0].material.color;
+			Color c = mission[0].color;
 			c.a = Mathf.Lerp(0f, 1f, time);
-			if (time < 0)
+			if (time < 0f)
 				c.a = 0;
+			for (int i = 0; i < mission.Length; i++) {
+				mission[i].color = c;
+			}
 		}
 	}
 

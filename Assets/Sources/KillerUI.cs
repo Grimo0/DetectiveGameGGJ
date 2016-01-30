@@ -30,6 +30,9 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	void Update() {
+		for (int i = 0; i < missions.Length; i++) {
+			this.missions[i].Update();
+		}
 	}
 
 }
