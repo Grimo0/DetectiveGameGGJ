@@ -4,32 +4,20 @@ using System.Collections.Generic;
 [RequireComponent( typeof(NavMeshObstacle) )]
 public class Door : MonoBehaviour 
 {
-	public bool m_Open;
-	public bool m_Close;
+	[SerializeField]
+	private Animator m_Animator;
 
 	private List<NPCBehaviour> m_NPCBehaviours = new List<NPCBehaviour>();
 
 	private NavMeshObstacle m_NavMeshObstacle;
+
 
 	private void Awake()
 	{
 		m_NavMeshObstacle = GetComponent<NavMeshObstacle>();	
 	}
 
-	private void Update()
-	{
-		if (m_Open)
-		{
-			Open();
-			m_Open = false;
-		}
-
-		if (m_Close)
-		{
-			Close();
-			m_Close = false;
-		}
-	}
+	private bool m_IsClosed;
 
 	public void AddAgent(GameObject npc)
 	{
@@ -37,16 +25,17 @@ public class Door : MonoBehaviour
 		m_NPCBehaviours.AddRange(behaviours);
 	}
 
-	public void Open()
+	public void Toggle()
 	{
-		EnableObstacle(false);
-		UpdateAgents();
-	}
-
-	public void Close()
-	{
-		EnableObstacle(true);
-		UpdateAgents();
+		m_IsClosed = !m_IsClosed;
+		if (m_IsClosed)
+		{
+			Close();
+		}
+		else
+		{
+			Open();
+		}
 	}
 
 	public void UpdateAgents()
@@ -61,5 +50,21 @@ public class Door : MonoBehaviour
 	{
 		m_NavMeshObstacle.carving = isEnabled;
 		m_NavMeshObstacle.enabled = isEnabled;
+	}
+
+	private void Open()
+	{
+		EnableObstacle(false);
+		UpdateAgents();
+
+		m_Animator.SetTrigger(@"Open");
+	}
+	
+	private void Close()
+	{
+		EnableObstacle(true);
+		UpdateAgents();
+
+		m_Animator.SetTrigger(@"Close");
 	}
 }

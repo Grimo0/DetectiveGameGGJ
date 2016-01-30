@@ -24,6 +24,7 @@ public class Detective : MonoBehaviour {
     }
 
     private CharacterMouseOver targetCharacter;
+	private Door               targetDoor;
 
     RaycastHit hit;
 
@@ -32,14 +33,14 @@ public class Detective : MonoBehaviour {
     void Start()
     {
         cursorTarget = Resources.Load<Texture2D>("Sprites/cursorTarget");
-        ShootMode = true;
     }
 
 	void Update()
     {
-        if (ShootMode)
+		bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, layer); 
+		if (ShootMode)
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, layer))
+			if (isHit)
             {
                 if (hit.collider != null)
                 {
@@ -80,5 +81,26 @@ public class Detective : MonoBehaviour {
                     Debug.Log("You lose");
             }
         }
+		else
+		{
+			if (isHit)
+			{
+				if (hit.collider.tag == "DoorCollider")
+				{
+					//find door
+					targetDoor = hit.collider.GetComponent<Door>();
+				}
+			}
+			else
+			{
+				targetDoor = null;
+			}
+
+			if (Input.GetMouseButtonDown(0) && targetDoor != null)
+			{
+				targetDoor.Toggle();
+			}
+
+		}
 	}
 }
