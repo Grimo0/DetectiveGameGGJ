@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : MonoBehaviour {
+public class KillerInput : MonoBehaviour {
 
 	private Rigidbody rb;
 
