@@ -33,7 +33,8 @@ public class NPCs : MonoBehaviour {
 		get { return this._pants; }
 	}
 
-	void Start() {
+	public void Initialize()
+    {
 		Sprite[] hatSprites = Resources.LoadAll<Sprite>("Sprites/characters/hats");
 		_hats = new CharacterPart[hatSprites.Length];
 		for (int i = 0; i < hatSprites.Length; i++) {

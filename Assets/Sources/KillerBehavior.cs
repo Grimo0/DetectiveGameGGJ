@@ -6,10 +6,6 @@ public class KillerBehavior : MonoBehaviour {
 	private Mission[] missions;
 	public KillerUI killerUI;
 
-	void Start () {
-		Initialize();
-	}
-
 	public void Initialize() {
 		GenerateMissions();
 		killerUI.Initialize(missions);
@@ -20,6 +16,7 @@ public class KillerBehavior : MonoBehaviour {
 
 		NPCs npcs = GetComponent<NPCs>();
 		List<CharacterPart>[] parts = new List<CharacterPart>[4];
+        
 		parts[0] = new List<CharacterPart>(npcs.Hats);
 		parts[1] = new List<CharacterPart>(npcs.Heads);
 		parts[2] = new List<CharacterPart>(npcs.Bodies);
