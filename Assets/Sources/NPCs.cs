@@ -67,16 +67,22 @@ public class NPCs : MonoBehaviour {
 			level.AddCharacter(npcAppearance.transform);
 
 			NPC npc = npcAppearance.GetComponent<NPC>();
-			MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
+			MoveToTarget npcMoveToTarget = npc.FindBehaviour<MoveToTarget>();
 			if (npcMoveToTarget != null)
 			{
 				level.SetTargetKiller(npcMoveToTarget);
 			}
 
-			MoveToWaypoints npcMoveToWaypoints = npc.GetMoveToWaypoints();
+			MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
 			if (npcMoveToWaypoints != null)
 			{
 				level.SetRandomPath(npcMoveToWaypoints);
+			}
+
+			MoveToNewWaypoints npcMoveToNewWaypoints = npc.FindBehaviour<MoveToNewWaypoints>();
+			if (npcMoveToNewWaypoints != null)
+			{
+				npcMoveToNewWaypoints.Init(level);
 			}
 
 			//start NPC
