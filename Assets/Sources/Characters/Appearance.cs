@@ -3,44 +3,29 @@ using System.Collections;
 
 public class Appearance : MonoBehaviour {
 	
-	private CharacterPart _hat;
-	public SpriteRenderer hatRenderer;
-
-	private CharacterPart _head;
-	public SpriteRenderer headRenderer;
-
-	private CharacterPart _body;
-	public SpriteRenderer bodyRenderer;
-
-	private CharacterPart _pant;
-	public SpriteRenderer pantRenderer;
+	private CharacterPart[] parts;
+	public SpriteRenderer[] partsRenderer;
 
 
-	// Use this for initialization
-	void Start() {
-		
+	public void Initialize(CharacterPart[] parts) {
+		this.parts = parts;
+		partsRenderer[0].sprite = parts[0].sprite;
+		partsRenderer[1].sprite = parts[1].sprite;
+		partsRenderer[2].sprite = parts[2].sprite;
+		partsRenderer[3].sprite = parts[3].sprite;
 	}
 
-	public void Initialize(CharacterPart hat, CharacterPart head, CharacterPart body, CharacterPart pant) {
-		this._hat = hat;
-		this.hatRenderer.sprite = hat.sprite;
-
-		this._head = head;
-		this.headRenderer.sprite = head.sprite;
-
-		this._body = body;
-		this.bodyRenderer.sprite = body.sprite;
-
-		this._pant = pant;
-		this.pantRenderer.sprite = pant.sprite;
-	}
-	
-	// Update is called once per frame
-	void Update() {
-	
+	public void SetPart(CharacterPart part) {
+		for (int i = 0; i < parts.Length; i++) {
+			if (part.category == parts[i].category) {
+				parts[i] = part;
+				partsRenderer[i].sprite = part.sprite;
+				return;
+			}
+		}
 	}
 
 	public bool HasPart(CharacterPart part) {
-		return part == _hat || part == _head || part == _body || part == _pant;
+		return part == parts[0] || part == parts[1] || part == parts[2] || part == parts[3];
 	}
 }
