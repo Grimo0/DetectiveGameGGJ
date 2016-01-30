@@ -75,9 +75,9 @@ public class Detective : MonoBehaviour {
             if (Input.GetButtonDown("Left_Click") && targetCharacter != null)
             {
                 if (targetCharacter.transform.parent.tag == "Player")
-                    Debug.Log("You killed the killer");
+                    GetComponent<EndGame>().DetectiveWins();
                 else
-                    Debug.Log("You lose");
+                    GetComponent<EndGame>().WrongKillerKilled();
             }
         }
 		else
