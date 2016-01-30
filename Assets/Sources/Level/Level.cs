@@ -28,14 +28,19 @@ public class Level : MonoBehaviour
 		npcMoveToWaypoints.AddWaypoints(path.Waypoints);
 	}
 
-	public void SetTargetKiller(MoveToTarget npcMoveToTarget)
+	public Transform GetRandomTarget()
 	{
-		//killer is first character
-		npcMoveToTarget.AddTarget(m_Characters[0]);
+		//avoid picking killer
+		return m_Characters[Random.Range(1, m_Characters.Count)];
 	}
 
-	public void SetRandomTarget(MoveToTarget npcMoveToTarget)
+	public void StartNPCBehaviours()
 	{
-		npcMoveToTarget.AddTarget(m_Characters[Random.Range(0, m_Characters.Count)]);
+		//skip killer
+		for (int i = 1; i < m_Characters.Count; i++)
+		{
+			NPC currentNPC = m_Characters[i].GetComponent<NPC>();
+			currentNPC.StartBehaviour();
+		}
 	}
 }

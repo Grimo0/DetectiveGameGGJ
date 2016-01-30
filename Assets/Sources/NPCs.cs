@@ -6,6 +6,7 @@ public class NPCs : MonoBehaviour {
 	public GameObject prefabNPC, prefabKiller;
 
 	public Level level;
+	public KillerBehavior killerBehavior;
 
     public Transform charactersContainer;
 
@@ -95,8 +96,7 @@ public class NPCs : MonoBehaviour {
 				MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
 				if (npcMoveToTarget != null)
 				{
-					//level.SetTargetKiller(npcMoveToTarget);
-					npcMoveToTarget.AddTarget(npcMoveToTarget.transform);
+					//npcMoveToTarget.Init(killerBehavior, level);
 				}
 
 				MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
@@ -110,9 +110,6 @@ public class NPCs : MonoBehaviour {
 				{
 					npcMoveToNewWaypoints.Init(level);
 				}
-
-				//start NPC
-				npc.StartBehaviour();
 			}
 		}
 	}

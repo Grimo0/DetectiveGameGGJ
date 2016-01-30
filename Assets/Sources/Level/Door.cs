@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+
+using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent( typeof(NavMeshObstacle) )]
 public class Door : MonoBehaviour 
 {
+	[SerializeField]
+	protected int m_Delay;
+
+	[SerializeField]
+	private TextMesh m_Text;
+
 	[SerializeField]
 	private Animator m_Animator;
 
@@ -11,13 +19,16 @@ public class Door : MonoBehaviour
 
 	private NavMeshObstacle m_NavMeshObstacle;
 
+	private int m_CooldownCounter;
+
+	protected Coroutine m_CooldownCoroutine;
 
 	private void Awake()
 	{
 		m_NavMeshObstacle = GetComponent<NavMeshObstacle>();	
 	}
 
-	private bool m_IsClosed;
+	protected bool m_IsClosed;
 
 	public void AddAgent(GameObject npc)
 	{
@@ -25,17 +36,45 @@ public class Door : MonoBehaviour
 		m_NPCBehaviours.AddRange(behaviours);
 	}
 
-	public void Toggle()
+	public virtual void Close()
 	{
-		m_IsClosed = !m_IsClosed;
 		if (m_IsClosed)
 		{
-			Close();
+			return;
 		}
-		else
+
+		CloseNoCoroutine();
+
+		//open in 5 seconds
+		if (m_CooldownCoroutine != null)
 		{
-			Open();
+			StopCoroutine(m_CooldownCoroutine);
 		}
+
+		m_CooldownCoroutine = StartCoroutine(Countdown());
+	}
+
+	public virtual void CloseNoCoroutine()
+	{
+		EnableObstacle(true);
+		UpdateAgents();
+
+		m_Animator.SetTrigger(@"Close");
+
+		m_IsClosed = true;
+	}
+
+	public void Hover()
+	{
+		if (!m_IsClosed)
+		{
+			m_Animator.SetBool(@"Hover", true);	
+		}
+	}
+
+	public void HoverOut()
+	{
+		m_Animator.SetBool(@"Hover", false);
 	}
 
 	public void UpdateAgents()
@@ -52,19 +91,30 @@ public class Door : MonoBehaviour
 		m_NavMeshObstacle.enabled = isEnabled;
 	}
 
-	private void Open()
+	public virtual void Open()
 	{
+		m_IsClosed = false;
+
 		EnableObstacle(false);
 		UpdateAgents();
 
 		m_Animator.SetTrigger(@"Open");
 	}
-	
-	private void Close()
-	{
-		EnableObstacle(true);
-		UpdateAgents();
 
-		m_Animator.SetTrigger(@"Close");
+	protected IEnumerator Countdown()
+	{
+		m_CooldownCounter = m_Delay;
+		while (m_CooldownCounter > 0)
+		{
+			m_Text.text = m_CooldownCounter.ToString();
+			m_CooldownCounter--;
+
+			yield return new WaitForSeconds(1f);
+		}
+
+		//reset text
+		m_Text.text = @"";
+
+		Open();
 	}
 }

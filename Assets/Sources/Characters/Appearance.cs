@@ -4,7 +4,7 @@ using System.Collections;
 public class Appearance : MonoBehaviour {
 	
 	private CharacterPart[] parts;
-	public SpriteRenderer[] partsRenderer;
+	public SpriteRenderer[] partsRenderer = new SpriteRenderer[4];
 
 
 	public void Initialize(CharacterPart[] parts) {

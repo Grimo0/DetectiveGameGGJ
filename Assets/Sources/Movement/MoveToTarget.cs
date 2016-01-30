@@ -6,6 +6,15 @@ public class MoveToTarget : NPCBehaviour
 	[SerializeField]
 	private Transform m_Target;
 
+	private KillerBehavior m_KillerBehaviour;
+	private Level          m_Level;
+
+	public void Init(KillerBehavior killerBehaviour, Level level)
+	{
+		m_KillerBehaviour = killerBehaviour;
+		m_Level           = level;
+	}
+
 	protected override void Update()
 	{
 		if (m_IsStarted)
@@ -17,13 +26,10 @@ public class MoveToTarget : NPCBehaviour
 		base.Update();
 	}
 
-	public void AddTarget(Transform target)
-	{
-		m_Target = target;
-	}
-
 	public override void Move()
 	{
+		m_Target = FindKillerTarget();
+
 		m_NavMeshAgent.destination = m_Target.position;
 		m_IsStarted = true;
 	}
@@ -31,5 +37,29 @@ public class MoveToTarget : NPCBehaviour
 	public override void Refresh()
 	{
 		Move();
+	}
+
+	private Transform FindKillerTarget()
+	{
+		Transform result = null;
+
+		NPC npc;
+
+		bool found = false;
+		do
+		{
+			Transform randomTarget = m_Level.GetRandomTarget();
+			npc = randomTarget.GetComponent<NPC>();
+
+			found = m_KillerBehaviour.IsATarget(npc) != -1;
+		}
+		while(!found);
+
+		if (found)
+		{
+			result = npc.transform;
+		}
+
+		return result;
 	}
 }
