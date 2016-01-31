@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour {
 
 		if (minutes == 0)
 		{
-			if (seconds == 20)
+			if (seconds == 15)
 				text.color = Color.red;
 			else if (seconds == 0)
 				GetComponent<EndGame>().TimerFinished();
