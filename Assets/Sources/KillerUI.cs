@@ -16,14 +16,17 @@ public class KillerUI : MonoBehaviour {
 
 	public FadeSound fadeSound;
 
-	private float timerShow = -1f;
+    public Animator pentacle;
+
+	private float timerModel = -1f;
 	private float modelFinalAlpha;
 	private float timerText = -1f;
 	private float nextTextFinalAlpha;
 
-	public void SetMission(int ritualNumber, Mission mission) {
+	public void SetMission(int ritualNumber, Mission mission)
+    {
 		this.ritualNumber = ritualNumber;
-		timerShow = 1f;
+		timerModel = 1f;
 		modelFinalAlpha = 1f;
 		if (ritualNumber != 0) {
 			timerText = .5f;
@@ -46,13 +49,13 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	void Update () {
-		if (timerShow >= 0f) {
-			timerShow -= Time.deltaTime;
+		if (timerModel >= 0f) {
+			timerModel -= Time.deltaTime;
 			Color c = missionRenderers[0].color;
-			c.a = Mathf.Lerp(modelFinalAlpha, 1f - modelFinalAlpha, timerShow);
-			if (timerShow < 0f) {
+			c.a = Mathf.Lerp(modelFinalAlpha, 1f - modelFinalAlpha, timerModel);
+			if (timerModel < 0f) {
 				c.a = modelFinalAlpha;
-				timerShow = -1f;
+				timerModel = -1f;
 			}
 			for (int i = 0; i < missionRenderers.Length; i++) {
 				missionRenderers[i].color = c;
@@ -72,7 +75,7 @@ public class KillerUI : MonoBehaviour {
 
 	public void EndMission() {
 		timer.StopTimer();
-		timerShow = 1f;
+		timerModel = 1f;
 		modelFinalAlpha = 0f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 		Invoke("LightCandle", .5f);
@@ -82,7 +85,8 @@ public class KillerUI : MonoBehaviour {
 		}
 	}
 
-	private void LightCandle() {
+	private void LightCandle()
+    {
 		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 		timerText = 1f;
 		nextTextFinalAlpha = 1f;
@@ -91,4 +95,9 @@ public class KillerUI : MonoBehaviour {
 	private void StartTimer() {
 		timer.StartTimer();
 	}
+
+	public void DoPentacleAnim()
+    {
+        pentacle.SetTrigger("DoAnim");
+    }
 }

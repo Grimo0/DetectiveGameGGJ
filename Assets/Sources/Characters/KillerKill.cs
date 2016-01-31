@@ -47,6 +47,7 @@ public class KillerKill : MonoBehaviour {
 				//parent offset needs to be changed
 				DestroyCoroutine = DestroyNPC (targetCharacter.parent.parent.gameObject);
 				StartCoroutine (DestroyCoroutine);
+                GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
 			}
         }
     }
