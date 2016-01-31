@@ -9,9 +9,9 @@ public class KillerKill : MonoBehaviour {
 
 	private IEnumerator DestroyCoroutine;
 
-	void OnTriggerEnter(Collider obj)
+	void OnTriggerStay(Collider obj)
     {
-        if(obj.tag == "SelectionCollider")
+        if(obj.tag == "SelectionCollider" && obj.transform != targetCharacter)
         {
             if (targetCharacter != null)
             {
