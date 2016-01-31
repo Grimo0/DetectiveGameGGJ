@@ -17,7 +17,7 @@ public class KillerBehavior : MonoBehaviour {
 
 
 	public void Initialize() {
-		ritualNumber = 0;
+		ritualNumber = 3;
 		NewMission();
 	}
 
@@ -28,7 +28,10 @@ public class KillerBehavior : MonoBehaviour {
 		currentMission = new Mission();
 		List<Appearance> npcs = GameObject.Find("GameManager").GetComponent<NPCs>().npcs;
 		Appearance target = npcs[Random.Range(0, npcs.Count)];
-		for (int i = 0; i < ritualNumber / 2 + 1; i++) {
+		int partsNumber = ritualNumber;
+		if (ritualNumber == 0)
+			partsNumber = 1;
+		for (int i = 0; i < partsNumber; i++) {
 			while (!currentMission.AddPart(target.Parts[Random.Range(0, target.Parts.Length)]));
 		}
 		killerUI.SetMission(currentMission);
