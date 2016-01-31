@@ -17,7 +17,7 @@ public class KillerBehavior : MonoBehaviour {
 
 
 	public void Initialize() {
-		ritualNumber = 3;
+		ritualNumber = 0;
 		NewMission();
 	}
 
@@ -34,7 +34,7 @@ public class KillerBehavior : MonoBehaviour {
 		for (int i = 0; i < partsNumber; i++) {
 			while (!currentMission.AddPart(target.Parts[Random.Range(0, target.Parts.Length)]));
 		}
-		killerUI.SetMission(currentMission);
+		killerUI.SetMission(ritualNumber, currentMission);
 	}
 
 
@@ -51,10 +51,10 @@ public class KillerBehavior : MonoBehaviour {
 
 	public bool Kill(NPC npc) {
 		if (IsTarget(npc)) {
-			killerUI.EndMission(ritualNumber);
+			killerUI.EndMission();
 			currentMission.Finished = true;
 			ritualNumber++;
-			Invoke("NewMission", 1f);
+			Invoke("NewMission", 3f);
 			//NewMission();
 			return true;
 		}
