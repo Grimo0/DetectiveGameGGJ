@@ -14,6 +14,9 @@ public class KillerUI : MonoBehaviour {
 
 	public AudioClip normalMusic;
 	public AudioClip tenseMusic;
+	public AudioClip bellClip;
+
+	public AudioSource source;
 
 	public FadeSound fadeSound;
 
@@ -81,7 +84,8 @@ public class KillerUI : MonoBehaviour {
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 		Invoke("LightCandle", .5f);
 
-		if (ritualNumber > 1) {
+		//do it only once between 3rd and 4th skill
+		if (ritualNumber == 2) {
 			fadeSound.PlayFade(normalMusic, tenseMusic);
 		}
 	}
@@ -91,6 +95,8 @@ public class KillerUI : MonoBehaviour {
 		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 		timerText = 1f;
 		nextTextFinalAlpha = 1f;
+
+		source.PlayOneShot(bellClip);
 	}
 
 	private void StartTimer() {

@@ -7,7 +7,14 @@ public class KillerKill : MonoBehaviour {
 	public AudioClip[] BruitageCri;
 	public AudioSource Source;
 
+	private FadeSound FadeSound;
+
 	private IEnumerator DestroyCoroutine;
+
+	void Start()
+	{
+		FadeSound = FindObjectOfType<FadeSound>();	
+	}
 
 	void OnTriggerEnter(Collider obj)
     {
@@ -46,6 +53,8 @@ public class KillerKill : MonoBehaviour {
             GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
 
             targetCharacter.GetComponentInParent<Appearance>().DoDeathAnim();
+
+			FadeSound.StopWithDelay();
         }
     }
 

@@ -57,8 +57,7 @@ public class ShootModeUI : MonoBehaviour {
 	private IEnumerator UpdateEnergy(int energy, float energyCounter)
 	{
 		energyBarIndices.Remove(energy);
-		energyBarIndices.Insert(0, energy);
-
+	
 		float speed = 1f / detective.energyDelay;
 		while (Time.time - energyCounter < detective.energyDelay)
 		{
@@ -69,5 +68,7 @@ public class ShootModeUI : MonoBehaviour {
 		}
 
 		detective.energy++;
+		energyBarIndices.Add(energy);
+		energyBarIndices.Sort();
 	}
 }
