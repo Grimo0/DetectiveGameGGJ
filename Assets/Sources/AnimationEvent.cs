@@ -26,7 +26,7 @@ public class AnimationEvent : MonoBehaviour
 
 	public void StartGame()
 	{
-		m_GameStart.StartGame();	
+		m_GameStart.StartGame();
 	}
 
 }
