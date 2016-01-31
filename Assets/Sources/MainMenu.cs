@@ -4,7 +4,8 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	public void NewGame() {
+	public void NewGame()
+    {
         SceneManager.LoadScene(1);
 	}
 
