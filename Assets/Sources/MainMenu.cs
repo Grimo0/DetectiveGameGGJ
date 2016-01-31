@@ -4,9 +4,10 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	public void NewGame()
-    {
-        SceneManager.LoadScene(1);
+	public void NewGame() {
+		transform.FindChild("MainMenu").gameObject.SetActive(false);
+		transform.FindChild("HowToMenu").gameObject.SetActive(true);
+		transform.FindChild("Credits").gameObject.SetActive(false);
 	}
 
 	public void Credits() {

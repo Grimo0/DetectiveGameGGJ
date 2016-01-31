@@ -6,10 +6,6 @@ public class HowToScreen : MonoBehaviour {
 
 	private bool killerPressed = false;
 	private bool detectivePressed = false;
-
-	void Start () {
-		
-	}
 	
 	void Update () {
 		if (Input.GetButtonDown("Controller_Action") || Input.GetKeyDown(KeyCode.Space))
