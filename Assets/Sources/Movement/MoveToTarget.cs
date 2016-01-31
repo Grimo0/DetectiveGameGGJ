@@ -4,10 +4,15 @@ using System.Collections;
 public class MoveToTarget : NPCBehaviour 
 {
 	[SerializeField]
+	private float m_Delay;
+
+	[SerializeField]
 	private Transform m_Target;
 
 	private KillerBehavior m_KillerBehaviour;
 	private Level          m_Level;
+
+	private float m_DelayCounter;
 
 	public void Init(KillerBehavior killerBehaviour, Level level)
 	{
@@ -19,19 +24,47 @@ public class MoveToTarget : NPCBehaviour
 	{
 		if (m_IsStarted)
 		{
-			//follow target in case it changes position
-			m_NavMeshAgent.destination = m_Target.position;
+			if (Time.time - m_DelayCounter > m_Delay)
+			{
+				m_IsStarted = false;
+				OnCompleted.Invoke();
+
+				return;
+			}
+
+			if (m_Target != null)
+			{
+				//follow target in case it changes position
+				m_NavMeshAgent.destination = m_Target.position;
+			}
+			else
+			{
+				//target KILLED
+				m_NavMeshAgent.destination = transform.position;
+			}
 		}
 
 		base.Update();
+	}
+
+	public void SetTarget(Transform target)
+	{
+		m_Target = target;
+	}
+
+	public void GoToTarget()
+	{
+		m_NavMeshAgent.destination = m_Target.position;
+		m_IsStarted = true;
+
+		m_DelayCounter = Time.time;
 	}
 
 	public override void Move()
 	{
 		m_Target = FindKillerTarget();
 
-		m_NavMeshAgent.destination = m_Target.position;
-		m_IsStarted = true;
+		GoToTarget();
 	}
 
 	public override void Refresh()
@@ -43,7 +76,7 @@ public class MoveToTarget : NPCBehaviour
 	{
 		Transform result = transform;
 
-		NPC npc;
+		NPC npc = null;
 
 		//try 50 times then just go away
 		int iter = 0, max = 50;
@@ -52,9 +85,12 @@ public class MoveToTarget : NPCBehaviour
 		do
 		{
 			Transform randomTarget = m_Level.GetRandomTarget();
-			npc = randomTarget.GetComponent<NPC>();
+			if (randomTarget != null)
+			{
+				npc   = randomTarget.GetComponent<NPC>();
+				found = m_KillerBehaviour.IsTarget(npc);
+			}
 
-			found = m_KillerBehaviour.IsTarget(npc);
 			iter++;
 		}
 		while(!found && iter < max);

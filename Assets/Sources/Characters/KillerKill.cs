@@ -44,7 +44,8 @@ public class KillerKill : MonoBehaviour {
             
 			if (DestroyCoroutine == null) 
 			{
-				DestroyCoroutine = DestroyNPC (targetCharacter.parent.gameObject);
+				//parent offset needs to be changed
+				DestroyCoroutine = DestroyNPC (targetCharacter.parent.parent.gameObject);
 				StartCoroutine (DestroyCoroutine);
 			}
         }

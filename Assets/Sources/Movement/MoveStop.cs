@@ -16,7 +16,7 @@ public class MoveStop : NPCBehaviour
 
 	public override void Refresh()
 	{
-		Move();	
+		Move();
 	}
 
 	private void Completed()

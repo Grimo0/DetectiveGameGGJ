@@ -4,6 +4,9 @@ using System.Collections;
 public class NPC : MonoBehaviour 
 {
 	[SerializeField]
+	private float m_DistributionRatio;
+
+	[SerializeField]
 	private float[] m_BehaviourProbabilities;
 
 	[SerializeField]
@@ -14,6 +17,8 @@ public class NPC : MonoBehaviour
 	{
 		int randomBehaviourIndex = PickBehaviour();
 		m_NPCBehaviours[randomBehaviourIndex].Move();
+
+		Redistribute(randomBehaviourIndex);
 	}
 
 	public T FindBehaviour<T>() where T : NPCBehaviour
@@ -56,5 +61,23 @@ public class NPC : MonoBehaviour
 		}
 
 		return m_BehaviourProbabilities.Length - 1;
+	}
+
+	private void Redistribute(int index)
+	{
+		//penalize picked behaviour and distribute equally a certain ratio of probability
+		float value = m_BehaviourProbabilities[index] * m_DistributionRatio;
+		m_BehaviourProbabilities[index] -= value;
+
+		int count = m_BehaviourProbabilities.Length - 1;
+		value /= count;
+
+		for (int i = 0; i < m_BehaviourProbabilities.Length; i++)
+		{
+			if (i != index)
+			{
+				m_BehaviourProbabilities[index] += value;
+			}
+		}
 	}
 }

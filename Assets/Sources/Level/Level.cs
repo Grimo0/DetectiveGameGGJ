@@ -9,10 +9,21 @@ public class Path
 	public Transform[] Waypoints;
 }
 
+[System.Serializable]
+public class Solo
+{
+	public string Name;
+
+	public Transform Waypoint;
+}
+
 public class Level : MonoBehaviour 
 {
 	[SerializeField]
 	private List<Path> m_Paths;
+
+	[SerializeField]
+	private List<Solo> m_Solos;
 
 	[SerializeField]
 	private List<Transform> m_Characters;
@@ -32,6 +43,11 @@ public class Level : MonoBehaviour
 	{
 		//avoid picking killer
 		return m_Characters[Random.Range(1, m_Characters.Count)];
+	}
+
+	public Transform GetRandomSolo()
+	{
+		return m_Solos[Random.Range(0, m_Solos.Count)].Waypoint;
 	}
 
 	public void StartNPCBehaviours()
