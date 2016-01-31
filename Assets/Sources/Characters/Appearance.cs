@@ -32,4 +32,28 @@ public class Appearance : MonoBehaviour {
 	public bool HasPart(CharacterPart part) {
 		return part == parts[0] || part == parts[1] || part == parts[2] || part == parts[3];
 	}
+
+    public void DoDeathAnim()
+    {
+        foreach(SpriteRenderer sprite in partsRenderer)
+        {
+            sprite.GetComponent<Animator>().SetTrigger("DoDeath");
+        }
+        Invoke("DestroySelf", 3f);
+    }
+
+    void DestroySelf()
+    {
+        GameObject.Find("GameManager").GetComponent<NPCs>().npcs.Remove(this);
+
+        KillerBehavior killerBehavior = GameObject.Find("GameManager").GetComponent<KillerBehavior>();
+        if (killerBehavior.Kill(GetComponent<NPC>()))
+        {
+            Debug.Log("mission " + killerBehavior.RitualNumber + " achieved");
+        }
+        else
+            Debug.Log("wrong NPC");
+
+        Destroy(gameObject);
+    }
 }
