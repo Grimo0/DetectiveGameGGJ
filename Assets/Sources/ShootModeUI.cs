@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 using System.Collections;
+using System.Collections.Generic;
 
 public class ShootModeUI : MonoBehaviour {
 
@@ -20,6 +21,8 @@ public class ShootModeUI : MonoBehaviour {
     Image icon;
 
 	float energyCounter;
+
+	private List<int> energyBarIndices = new List<int>{0,1,2};
 
     void Start()
     {
@@ -45,12 +48,17 @@ public class ShootModeUI : MonoBehaviour {
 
 	public void EnergyUsed()
 	{
-		energyBars[detective.energy].fillAmount = 0;
-		StartCoroutine(UpdateEnergy(detective.energy, Time.time));
+		int energyIndex = energyBarIndices[energyBarIndices.Count - 1];
+
+		energyBars[energyIndex].fillAmount = 0;
+		StartCoroutine(UpdateEnergy(energyIndex, Time.time));
 	}
 
 	private IEnumerator UpdateEnergy(int energy, float energyCounter)
 	{
+		energyBarIndices.Remove(energy);
+		energyBarIndices.Insert(0, energy);
+
 		float speed = 1f / detective.energyDelay;
 		while (Time.time - energyCounter < detective.energyDelay)
 		{
