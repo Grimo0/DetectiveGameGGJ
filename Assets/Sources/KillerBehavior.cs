@@ -48,7 +48,8 @@ public class KillerBehavior : MonoBehaviour {
 			killerUI.EndMission(ritualNumber);
 			currentMission.Finished = true;
 			ritualNumber++;
-			NewMission();
+			if (ritualNumber < 5)
+				NewMission();
 			killerUI.SetMission(currentMission);
             CheckWin();
 			return true;

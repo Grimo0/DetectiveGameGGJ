@@ -5,6 +5,7 @@ public class KillerUI : MonoBehaviour {
 
 	public SpriteRenderer[] missionRenderers = new SpriteRenderer[3];
 	public Animator[] circles = new Animator[5];
+	public Animator[] candles = new Animator[5];
 
 	public AudioClip normalMusic;
 	public AudioClip tenseMusic;
@@ -34,6 +35,7 @@ public class KillerUI : MonoBehaviour {
 	public void EndMission(int ritualNumber) {
 		time = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
+		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 
 		if (ritualNumber > 1)
 		{
