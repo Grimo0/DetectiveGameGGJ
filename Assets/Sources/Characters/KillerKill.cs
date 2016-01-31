@@ -46,6 +46,8 @@ public class KillerKill : MonoBehaviour {
             GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
 
             targetCharacter.GetComponentInParent<Appearance>().DoDeathAnim();
+
+            targetCharacter = null;
         }
     }
 
