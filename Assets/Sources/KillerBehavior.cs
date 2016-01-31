@@ -17,18 +17,24 @@ public class KillerBehavior : MonoBehaviour {
 
 
 	public void Initialize() {
-		ritualNumber = 0;
+		ritualNumber = 3;
 		NewMission();
-		killerUI.SetMission(currentMission);
 	}
 
 	public void NewMission() {
+		if (CheckWin())
+			return;
+		
 		currentMission = new Mission();
 		List<Appearance> npcs = GameObject.Find("GameManager").GetComponent<NPCs>().npcs;
 		Appearance target = npcs[Random.Range(0, npcs.Count)];
-		for (int i = 0; i < ritualNumber / 2 + 1; i++) {
+		int partsNumber = ritualNumber;
+		if (ritualNumber == 0)
+			partsNumber = 1;
+		for (int i = 0; i < partsNumber; i++) {
 			while (!currentMission.AddPart(target.Parts[Random.Range(0, target.Parts.Length)]));
 		}
+		killerUI.SetMission(currentMission);
 	}
 
 
@@ -48,19 +54,18 @@ public class KillerBehavior : MonoBehaviour {
 			killerUI.EndMission(ritualNumber);
 			currentMission.Finished = true;
 			ritualNumber++;
-			if (ritualNumber < 5)
-				NewMission();
-			killerUI.SetMission(currentMission);
-            CheckWin();
+			Invoke("NewMission", 1f);
+			//NewMission();
 			return true;
 		}
 		return false;
 	}
 
-    void CheckWin()
+    bool CheckWin()
     {
 		if (ritualNumber < 5)
-			return;
+			return false;
         GetComponent<EndGame>().KillerWins();
+		return true;
     }
 }
