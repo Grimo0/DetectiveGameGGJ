@@ -12,9 +12,11 @@ public class KillerUI : MonoBehaviour {
 
 	public FadeSound fadeSound;
 
-	private float time = -1f;
+	private float timerFade = -1f;
+	private float timerShow = -1f;
 
 	public void SetMission(Mission mission) {
+		timerShow = 1f;
 		for (int i = 0; i < missionRenderers.Length; i++) {
 			if (i < mission.Parts.Count)
 				missionRenderers[i].sprite = mission.Parts[i].sprite;
@@ -24,19 +26,30 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	void Update () {
-		if (time >= 0f) {
-			time -= Time.deltaTime;
-			Color c = missionRenderers[0].material.color;
-			c.a = Mathf.Lerp(0f, 1f, time);
-			if (time < 0f) {
+		if (timerFade >= 0f) {
+			timerFade -= Time.deltaTime;
+			Color c = missionRenderers[0].color;
+			c.a = Mathf.Lerp(0f, 1f, timerFade);
+			if (timerFade < 0f) {
 				c.a = 0f;
-				time = -1f;
+				timerFade = -1f;
 			}
+			missionRenderers[0].color = c;
+		}
+		if (timerShow >= 0f) {
+			timerShow -= Time.deltaTime;
+			Color c = missionRenderers[0].color;
+			c.a = Mathf.Lerp(1f, 0f, timerShow);
+			if (timerShow < 0f) {
+				c.a = 1f;
+				timerShow = -1f;
+			}
+			missionRenderers[0].color = c;
 		}
 	}
 
 	public void EndMission(int ritualNumber) {
-		time = 1f;
+		timerFade = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 
