@@ -1,0 +1,38 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+# Conflicts:
+#	Assets/Resources/Sprites/Titlescreen/win_bourricot.png.meta
+#	Assets/Resources/Sprites/Titlescreen/win_nobody.png.meta
+#	Assets/Scenes/Game.unity
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 3 and 2 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   Assets/Prefabs/Canvas.prefab
+#	modified:   Assets/Prefabs/Detective.prefab
+#	modified:   Assets/Prefabs/GameManager.prefab
+#	modified:   Assets/Prefabs/Menu/Menu.prefab
+#	modified:   Assets/Resources/Sprites/Titlescreen/tuto_bckd.jpg.meta
+#	modified:   Assets/Resources/Sprites/Titlescreen/win_bourricot.png.meta
+#	modified:   Assets/Resources/Sprites/Titlescreen/win_nobody.png.meta
+#	new file:   Assets/Resources/Sprites/icon.png
+#	new file:   Assets/Resources/Sprites/icon.png.meta
+#	modified:   Assets/Scenes/MainMenu.unity
+#	modified:   Assets/Sources/EndGame.cs
+#	modified:   ProjectSettings/ProjectSettings.asset
+#	modified:   ProjectSettings/QualitySettings.asset
+#
+
