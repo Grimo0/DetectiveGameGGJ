@@ -12,8 +12,8 @@ public class NPC : MonoBehaviour
 	[SerializeField]
 	private NPCBehaviour[] m_NPCBehaviours;
 
-	//called from NPCBehaviour OnCompleted callback
-	public void StartBehaviour()
+    //called from NPCBehaviour OnCompleted callback
+    public void StartBehaviour()
 	{
 		int randomBehaviourIndex = PickBehaviour();
 		m_NPCBehaviours[randomBehaviourIndex].Move();

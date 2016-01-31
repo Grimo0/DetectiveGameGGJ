@@ -42,31 +42,15 @@ public class KillerKill : MonoBehaviour {
         {
             Debug.Log("killer has killed " + targetCharacter.name);
             
-			if (DestroyCoroutine == null) 
-			{
-				//parent offset needs to be changed
-				DestroyCoroutine = DestroyNPC (targetCharacter.parent.parent.gameObject);
-				StartCoroutine (DestroyCoroutine);
-                GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
-			}
+            Invoke("Laugth", 3f);
+            GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
+
+            targetCharacter.GetComponentInParent<Appearance>().DoDeathAnim();
         }
     }
 
-    IEnumerator DestroyNPC(GameObject npc)
+    void Laugth()
     {
-        yield return new WaitForSeconds(3f);
 		Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
-        Destroy(npc);
-		GameObject.Find("GameManager").GetComponent<NPCs>().npcs.Remove(npc.GetComponent<Appearance>());
-
-		KillerBehavior killerBehavior = GameObject.Find("GameManager").GetComponent<KillerBehavior>();
-		if (killerBehavior.Kill(npc.GetComponent<NPC>()))
-        {
-			Debug.Log("mission "+ killerBehavior.RitualNumber + " achieved");
-        }
-        else
-            Debug.Log("wrong NPC");
-
-		DestroyCoroutine = null;
     }
 }
