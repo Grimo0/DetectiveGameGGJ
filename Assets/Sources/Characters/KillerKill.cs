@@ -15,10 +15,10 @@ public class KillerKill : MonoBehaviour {
 	{
 		FadeSound = FindObjectOfType<FadeSound>();	
 	}
-
-	void OnTriggerEnter(Collider obj)
+		
+	void OnTriggerStay(Collider obj)
     {
-        if(obj.tag == "SelectionCollider")
+        if(obj.tag == "SelectionCollider" && obj.transform != targetCharacter)
         {
             if (targetCharacter != null)
             {
@@ -53,6 +53,8 @@ public class KillerKill : MonoBehaviour {
             GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
 
             targetCharacter.GetComponentInParent<Appearance>().DoDeathAnim();
+
+            targetCharacter = null;
 
 			FadeSound.StopWithDelay();
         }

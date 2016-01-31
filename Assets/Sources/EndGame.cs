@@ -57,6 +57,8 @@ public class EndGame : MonoBehaviour {
 		source.PlayOneShot(clip);
 
 		Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
+
+        FindObjectOfType<Detective>().enabled = false;
     }
 
     public void MainMenu()
