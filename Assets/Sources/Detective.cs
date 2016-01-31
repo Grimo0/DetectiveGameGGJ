@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+
 using System.Collections;
 
 public class Detective : MonoBehaviour {
     
+	public int energy;
+	public int energyDelay;
+
 	public LayerMask doorLayer;
 	public LayerMask shootLayer;
 
@@ -11,6 +16,8 @@ public class Detective : MonoBehaviour {
 	public AudioClip[] BruitageCri;
 
 	public AudioSource Source;
+
+	public UnityEvent OnDoorOpen;
 
     private bool shootMode;
     public bool ShootMode
@@ -100,7 +107,7 @@ public class Detective : MonoBehaviour {
 		{
 			if (isHit)
 			{
-				if (hit.collider.tag == "DoorCollider")
+				if (energy > 0 && hit.collider.tag == "DoorCollider")
 				{
 					//find door
 					targetDoor = hit.collider.GetComponent<Door>();
@@ -117,11 +124,13 @@ public class Detective : MonoBehaviour {
 				targetDoor = null;
 			}
 
-			if (Input.GetButtonDown("Left_Click") && targetDoor != null)
+			if (Input.GetButtonDown("Left_Click") && energy > 0 && targetDoor != null)
 			{
+				energy = Mathf.Max(0, energy - 1);
 				targetDoor.Close();
-			}
 
+				OnDoorOpen.Invoke();
+			}
 		}
 	}
 }
