@@ -7,6 +7,7 @@ public class KillerUI : MonoBehaviour {
 	public Animator[] circles = new Animator[5];
 	public Animator[] candles = new Animator[5];
 	public SpriteRenderer nextText;
+	public float nextTextFinalAlpha;
 
 	public AudioClip normalMusic;
 	public AudioClip tenseMusic;
@@ -15,9 +16,14 @@ public class KillerUI : MonoBehaviour {
 
 	private float timerFade = -1f;
 	private float timerShow = -1f;
+	private float timerText = -1f;
 
-	public void SetMission(Mission mission) {
+	public void SetMission(int ritualNumber, Mission mission) {
 		timerShow = 1f;
+		if (ritualNumber != 0) {
+			timerText = .5f;
+			nextTextFinalAlpha = 0f;
+		}
 		for (int i = 0; i < missionRenderers.Length; i++) {
 			if (i < mission.Parts.Count) {
 				missionRenderers[i].sprite = mission.Parts[i].sprite;
@@ -39,9 +45,9 @@ public class KillerUI : MonoBehaviour {
 				c.a = 0f;
 				timerFade = -1f;
 			}
-			missionRenderers[0].color = c;
-			c.a = 1f - c.a;
-			nextText.color = c;
+			for (int i = 0; i < missionRenderers.Length; i++) {
+				missionRenderers[i].color = c;
+			}
 		}
 		if (timerShow >= 0f) {
 			timerShow -= Time.deltaTime;
@@ -51,14 +57,26 @@ public class KillerUI : MonoBehaviour {
 				c.a = 1f;
 				timerShow = -1f;
 			}
-			missionRenderers[0].color = c;
-			c.a = 1f - c.a;
+			for (int i = 0; i < missionRenderers.Length; i++) {
+				missionRenderers[i].color = c;
+			}
+		}
+		if (timerText >= 0f) {
+			timerText -= Time.deltaTime;
+			Color c = nextText.color;
+			c.a = Mathf.Lerp(nextTextFinalAlpha, 1f - nextTextFinalAlpha, timerText);
+			if (timerText < 0f) {
+				c.a = nextTextFinalAlpha;
+				timerText = -1f;
+			}
 			nextText.color = c;
 		}
 	}
 
 	public void EndMission(int ritualNumber) {
 		timerFade = 1f;
+		timerText = .5f;
+		nextTextFinalAlpha = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 
