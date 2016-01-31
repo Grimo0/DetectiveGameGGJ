@@ -4,8 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent( typeof(NavMeshObstacle) )]
-public class Door : MonoBehaviour 
+public class Door : MonoBehaviour
+	
 {
+	public AudioClip Locked;
+	public AudioSource Source;
+
 	[SerializeField]
 	protected int m_Delay;
 
@@ -42,7 +46,7 @@ public class Door : MonoBehaviour
 		{
 			return;
 		}
-
+		Source.PlayOneShot (Locked);
 		CloseNoCoroutine();
 
 		//open in 5 seconds
