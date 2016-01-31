@@ -10,33 +10,49 @@ public class EndGame : MonoBehaviour {
     [SerializeField]
     Text infoText;
 
+	[SerializeField]
+	FadeSound fadeSound;
+
+	[SerializeField]
+	AudioClip cukooClip;
+	[SerializeField]
+	AudioClip killerClip;
+
+	[SerializeField]
+	AudioSource source;
+
     public void TimerFinished()
     {
-        ShowEndGameScreen();
+        ShowEndGameScreen(false);
         infoText.text = "The killer ran out of time.\nThe detective wins the game.";
     }
 
     public void WrongKillerKilled()
     {
-        ShowEndGameScreen();
+        ShowEndGameScreen(true);
         infoText.text = "The detective killed the wrong guy.\nThat one was not the killer.";
     }
 
     public void KillerWins()
     {
-        ShowEndGameScreen();
+        ShowEndGameScreen(true);
         infoText.text = "The killer has finished his ritual.\nThe apocalypse has started.";
     }
 
     public void DetectiveWins()
     {
-        ShowEndGameScreen();
+        ShowEndGameScreen(false);
         infoText.text = "The detective unmasked the killer.\nThe killer has lost the game.";
     }
 
-    void ShowEndGameScreen()
+	void ShowEndGameScreen(bool hasKillerWon)
     {
         Time.timeScale = 0f;
         endScreen.SetActive(true);
+
+		fadeSound.Stop();
+
+		AudioClip clip = hasKillerWon ? killerClip : cukooClip;
+		source.PlayOneShot(clip);
     }
 }

@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Detective : MonoBehaviour {
     
-	public LayerMask layer;
+	public LayerMask doorLayer;
+	public LayerMask shootLayer;
 
 	public AudioClip Shoot;
 	public AudioClip ReloadGun;
+	public AudioClip[] BruitageCri;
+
 	public AudioSource Source;
 
     private bool shootMode;
@@ -41,6 +44,7 @@ public class Detective : MonoBehaviour {
 
 	void Update()
     {
+		LayerMask layer = ShootMode ? shootLayer : doorLayer;
 		bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, layer); 
 
 		if (ShootMode)
@@ -77,13 +81,19 @@ public class Detective : MonoBehaviour {
                 targetCharacter.IsSelected = false;
                 targetCharacter = null;
             }
-
+				
             if (Input.GetButtonDown("Left_Click") && targetCharacter != null)
             {
+				Debug.Log("Play shoot");
+				Source.PlayOneShot(Shoot);
+				Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
+
                 if (targetCharacter.transform.parent.tag == "Player")
                     GetComponent<EndGame>().DetectiveWins();
                 else
                     GetComponent<EndGame>().WrongKillerKilled();
+
+				enabled = false;
             }
         }
 		else

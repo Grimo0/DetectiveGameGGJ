@@ -6,6 +6,11 @@ public class KillerUI : MonoBehaviour {
 	public SpriteRenderer[] missionRenderers = new SpriteRenderer[3];
 	public Animator[] circles = new Animator[5];
 
+	public AudioClip normalMusic;
+	public AudioClip tenseMusic;
+
+	public FadeSound fadeSound;
+
 	private float time = -1f;
 
 	public void SetMission(Mission mission) {
@@ -29,5 +34,10 @@ public class KillerUI : MonoBehaviour {
 	public void EndMission(int ritualNumber) {
 		time = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
+
+		if (ritualNumber > 1)
+		{
+			fadeSound.PlayFade(normalMusic, tenseMusic);
+		}
 	}
 }

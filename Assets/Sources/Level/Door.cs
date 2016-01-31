@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 [RequireComponent( typeof(NavMeshObstacle) )]
 public class Door : MonoBehaviour
-	
 {
 	public AudioClip Locked;
 	public AudioSource Source;
@@ -17,7 +16,7 @@ public class Door : MonoBehaviour
 	private TextMesh m_Text;
 
 	[SerializeField]
-	private Animator m_Animator;
+	protected Animator m_Animator;
 
 	private List<NPCBehaviour> m_NPCBehaviours = new List<NPCBehaviour>();
 

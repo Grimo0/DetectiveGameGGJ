@@ -10,10 +10,16 @@ public class GameStart : MonoBehaviour {
 	[SerializeField]
 	Level level;
 
-    void Start()
+	[SerializeField]
+	AudioSource source;
+
+    public void StartGame()
     {
         npcs.Initialize();
         killerBehaviour.Initialize();
 		level.StartNPCBehaviours();
+
+		//play background music
+		source.Play();
     }
 }

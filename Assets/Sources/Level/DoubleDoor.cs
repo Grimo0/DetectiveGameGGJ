@@ -21,6 +21,10 @@ public class DoubleDoor : Door
 		}
 
 		m_CooldownCoroutine = StartCoroutine(Countdown());
+
+		m_Animator.SetTrigger(@"Close");
+
+		Source.PlayOneShot(Locked);
 	}
 
 	public override void Open()
@@ -31,5 +35,7 @@ public class DoubleDoor : Door
 		{
 			m_Doors[i].Open();
 		}
+
+		m_Animator.SetTrigger(@"Open");
 	}
 }
