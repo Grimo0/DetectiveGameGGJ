@@ -31,7 +31,7 @@ public class ShootModeUI : MonoBehaviour {
 
     void Update()
     {
-        if (shootMode && (Input.GetButtonDown("Right_Click")))
+        if (Input.GetButtonDown("Right_Click"))
             ToggleShootMode();
     }
 
