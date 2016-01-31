@@ -8,6 +8,7 @@ public class KillerUI : MonoBehaviour {
 	public Animator[] candles = new Animator[5];
 	public SpriteRenderer nextText;
 	public Timer timer;
+	public int time;
 
 	private int ritualNumber;
 
@@ -33,7 +34,7 @@ public class KillerUI : MonoBehaviour {
 			nextTextFinalAlpha = 0f;
 		}
 
-		timer.SetTime(20 + 10 * (ritualNumber / 2));
+		timer.SetTime(time);
 		Invoke("StartTimer", .5f);
 
 		for (int i = 0; i < missionRenderers.Length; i++) {
