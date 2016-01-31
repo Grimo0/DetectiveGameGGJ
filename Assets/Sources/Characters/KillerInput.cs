@@ -15,13 +15,17 @@ public class KillerInput : MonoBehaviour
 	private float speed = 1f;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		rb = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		rb.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical")).normalized * speed * 4f;
+	void Update ()
+    {
+        Vector3 velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        if (velocity.magnitude > 1)
+            velocity.Normalize();
 
 		if (Input.GetButtonDown(boost))
 		{
@@ -31,6 +35,8 @@ public class KillerInput : MonoBehaviour
 		if (Input.GetButtonUp(boost))
 		{
 			speed = 1f;
-		}
-	}
+        }
+
+        rb.velocity = velocity * speed * 4f;
+    }
 }
