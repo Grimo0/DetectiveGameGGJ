@@ -51,10 +51,10 @@ public class KillerBehavior : MonoBehaviour {
 
 	public bool Kill(NPC npc) {
 		if (IsTarget(npc)) {
-			killerUI.EndMission(ritualNumber);
+			killerUI.EndMission();
 			currentMission.Finished = true;
 			ritualNumber++;
-			Invoke("NewMission", 2f);
+			Invoke("NewMission", 3f);
 			//NewMission();
 			return true;
 		}

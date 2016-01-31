@@ -9,6 +9,8 @@ public class KillerUI : MonoBehaviour {
 	public SpriteRenderer nextText;
 	public float nextTextFinalAlpha;
 
+	private int ritualNumber;
+
 	public AudioClip normalMusic;
 	public AudioClip tenseMusic;
 
@@ -19,6 +21,7 @@ public class KillerUI : MonoBehaviour {
 	private float timerText = -1f;
 
 	public void SetMission(int ritualNumber, Mission mission) {
+		this.ritualNumber = ritualNumber;
 		timerShow = 1f;
 		if (ritualNumber != 0) {
 			timerText = .5f;
@@ -73,16 +76,20 @@ public class KillerUI : MonoBehaviour {
 		}
 	}
 
-	public void EndMission(int ritualNumber) {
+	public void EndMission() {
 		timerFade = 1f;
-		timerText = .5f;
-		nextTextFinalAlpha = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
-		candles[ritualNumber].SetTrigger("EndMissionTrigger");
+		Invoke("LightCandle", .5f);
 
 		if (ritualNumber > 1)
 		{
 			fadeSound.PlayFade(normalMusic, tenseMusic);
 		}
+	}
+
+	private void LightCandle() {
+		candles[ritualNumber].SetTrigger("EndMissionTrigger");
+		timerText = 1f;
+		nextTextFinalAlpha = 1f;
 	}
 }
