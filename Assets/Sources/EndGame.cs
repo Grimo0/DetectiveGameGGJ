@@ -55,6 +55,8 @@ public class EndGame : MonoBehaviour {
 
 		AudioClip clip = hasKillerWon ? killerClip : cukooClip;
 		source.PlayOneShot(clip);
+
+		Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
     }
 
     public void MainMenu()
