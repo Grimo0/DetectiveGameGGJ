@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
 	public void NewGame() {
-		transform.FindChild("MainMenu").gameObject.SetActive(false);
-		transform.FindChild("HowToMenu").gameObject.SetActive(true);
-		transform.FindChild("Credits").gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
 	}
 
 	public void Credits() {

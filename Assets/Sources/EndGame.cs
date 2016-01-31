@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class EndGame : MonoBehaviour {
@@ -54,5 +55,10 @@ public class EndGame : MonoBehaviour {
 
 		AudioClip clip = hasKillerWon ? killerClip : cukooClip;
 		source.PlayOneShot(clip);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
