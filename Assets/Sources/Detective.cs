@@ -32,7 +32,7 @@ public class Detective : MonoBehaviour {
 				Source.PlayOneShot (ReloadGun);
             }
             else
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(cursorLock, Vector2.one * 16f, CursorMode.Auto);
         }
         get { return shootMode;  }
     }
@@ -42,11 +42,14 @@ public class Detective : MonoBehaviour {
 
     RaycastHit hit;
 
-    Texture2D cursorTarget;
+    Texture2D cursorTarget, cursorLock;
 
     void Start()
     {
         cursorTarget = Resources.Load<Texture2D>("Sprites/cursorTarget");
+        cursorLock = Resources.Load<Texture2D>("Sprites/cursorLock");
+
+        Cursor.SetCursor(cursorLock, Vector2.one * 15f, CursorMode.Auto);
     }
 
 	void Update()

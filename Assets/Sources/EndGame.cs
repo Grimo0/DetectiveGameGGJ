@@ -9,7 +9,10 @@ public class EndGame : MonoBehaviour {
     GameObject endScreen;
 
     [SerializeField]
-    Text infoText;
+	Text infoText;
+
+	[SerializeField]
+	Image winnerAvatar;
 
 	[SerializeField]
 	FadeSound fadeSound;
@@ -50,6 +53,10 @@ public class EndGame : MonoBehaviour {
     {
         Time.timeScale = 0f;
         endScreen.SetActive(true);
+		if (hasKillerWon)
+			winnerAvatar.sprite = Resources.Load<Sprite>("Sprites/Titlescreen/win_nobody");
+		else
+			winnerAvatar.sprite = Resources.Load<Sprite>("Sprites/Titlescreen/win_bourricot");
 
 		fadeSound.Stop();
 
