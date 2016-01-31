@@ -7,7 +7,7 @@ public class KillerUI : MonoBehaviour {
 	public Animator[] circles = new Animator[5];
 	public Animator[] candles = new Animator[5];
 	public SpriteRenderer nextText;
-	public float nextTextFinalAlpha;
+	public Timer timer;
 
 	private int ritualNumber;
 
@@ -16,17 +16,23 @@ public class KillerUI : MonoBehaviour {
 
 	public FadeSound fadeSound;
 
-	private float timerFade = -1f;
 	private float timerShow = -1f;
+	private float modelFinalAlpha;
 	private float timerText = -1f;
+	private float nextTextFinalAlpha;
 
 	public void SetMission(int ritualNumber, Mission mission) {
 		this.ritualNumber = ritualNumber;
 		timerShow = 1f;
+		modelFinalAlpha = 1f;
 		if (ritualNumber != 0) {
 			timerText = .5f;
 			nextTextFinalAlpha = 0f;
 		}
+
+		timer.SetTime(20 + 10 * (ritualNumber / 2));
+		Invoke("StartTimer", .5f);
+
 		for (int i = 0; i < missionRenderers.Length; i++) {
 			if (i < mission.Parts.Count) {
 				missionRenderers[i].sprite = mission.Parts[i].sprite;
@@ -40,24 +46,12 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	void Update () {
-		if (timerFade >= 0f) {
-			timerFade -= Time.deltaTime;
-			Color c = missionRenderers[0].color;
-			c.a = Mathf.Lerp(0f, 1f, timerFade);
-			if (timerFade < 0f) {
-				c.a = 0f;
-				timerFade = -1f;
-			}
-			for (int i = 0; i < missionRenderers.Length; i++) {
-				missionRenderers[i].color = c;
-			}
-		}
 		if (timerShow >= 0f) {
 			timerShow -= Time.deltaTime;
 			Color c = missionRenderers[0].color;
-			c.a = Mathf.Lerp(1f, 0f, timerShow);
+			c.a = Mathf.Lerp(modelFinalAlpha, 1f - modelFinalAlpha, timerShow);
 			if (timerShow < 0f) {
-				c.a = 1f;
+				c.a = modelFinalAlpha;
 				timerShow = -1f;
 			}
 			for (int i = 0; i < missionRenderers.Length; i++) {
@@ -77,12 +71,13 @@ public class KillerUI : MonoBehaviour {
 	}
 
 	public void EndMission() {
-		timerFade = 1f;
+		timer.StopTimer();
+		timerShow = 1f;
+		modelFinalAlpha = 0f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
 		Invoke("LightCandle", .5f);
 
-		if (ritualNumber > 1)
-		{
+		if (ritualNumber > 1) {
 			fadeSound.PlayFade(normalMusic, tenseMusic);
 		}
 	}
@@ -91,5 +86,9 @@ public class KillerUI : MonoBehaviour {
 		candles[ritualNumber].SetTrigger("EndMissionTrigger");
 		timerText = 1f;
 		nextTextFinalAlpha = 1f;
+	}
+
+	private void StartTimer() {
+		timer.StartTimer();
 	}
 }

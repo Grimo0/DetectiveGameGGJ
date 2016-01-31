@@ -27,7 +27,7 @@ public class KillerBehavior : MonoBehaviour {
 		
 		currentMission = new Mission();
 		List<Appearance> npcs = GameObject.Find("GameManager").GetComponent<NPCs>().npcs;
-		Appearance target = npcs[Random.Range(0, npcs.Count)];
+		Appearance target = npcs[Random.Range(1, npcs.Count)];
 		int partsNumber = ritualNumber;
 		if (ritualNumber == 0)
 			partsNumber = 1;
