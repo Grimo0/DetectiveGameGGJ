@@ -28,8 +28,10 @@ public class Door : MonoBehaviour
 
 	private void Awake()
 	{
-		m_NavMeshObstacle = GetComponent<NavMeshObstacle>();	
-	}
+		m_NavMeshObstacle = GetComponent<NavMeshObstacle>();
+        EnableObstacle(false);
+
+    }
 
 	protected bool m_IsClosed;
 
