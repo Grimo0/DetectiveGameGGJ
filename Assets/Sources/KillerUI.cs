@@ -79,7 +79,7 @@ public class KillerUI : MonoBehaviour {
 	public void EndMission() {
 		timerFade = 1f;
 		circles[ritualNumber].SetTrigger("EndMissionTrigger");
-		Invoke("LightCandle", 1f);
+		Invoke("LightCandle", .5f);
 
 		if (ritualNumber > 1)
 		{
