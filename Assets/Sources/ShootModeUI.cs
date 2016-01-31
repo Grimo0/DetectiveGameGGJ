@@ -23,11 +23,6 @@ public class ShootModeUI : MonoBehaviour {
     {
         if (shootMode && (Input.GetButtonDown("Right_Click")))
             ToggleShootMode();
-
-		if (Input.GetButtonDown("Shoot"))
-		{
-			ToggleShootMode();
-		}
     }
 
 	public void ToggleShootMode()
