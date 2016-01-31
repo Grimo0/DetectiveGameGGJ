@@ -15,8 +15,11 @@ public class KillerUI : MonoBehaviour {
 	private float time = -1f;
 
 	public void SetMission(Mission mission) {
-		for (int i = 0; i < mission.Parts.Count; i++) {
-			missionRenderers[i].sprite = mission.Parts[i].sprite;
+		for (int i = 0; i < missionRenderers.Length; i++) {
+			if (i < mission.Parts.Count)
+				missionRenderers[i].sprite = mission.Parts[i].sprite;
+			else
+				missionRenderers[i].sprite = null;
 		}
 	}
 
