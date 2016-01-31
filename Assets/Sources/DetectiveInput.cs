@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class DetectiveInput : MonoBehaviour 
+
 {
 	[SerializeField]
 	private string m_ShootInput;
