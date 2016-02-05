@@ -13,7 +13,7 @@ public class KillerKill : MonoBehaviour {
 
 	void Start()
 	{
-		FadeSound = FindObjectOfType<FadeSound>();	
+		FadeSound = FindObjectOfType<FadeSound>();
 	}
 		
 	void OnTriggerStay(Collider obj)

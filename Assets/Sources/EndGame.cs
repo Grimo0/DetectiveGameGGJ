@@ -69,7 +69,9 @@ public class EndGame : MonoBehaviour {
     }
 
     public void MainMenu()
-    {
+	{
+		Time.timeScale = 1f;
+		endScreen.SetActive(false);
         SceneManager.LoadScene(0);
     }
 }
