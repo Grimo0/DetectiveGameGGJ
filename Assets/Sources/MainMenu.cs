@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour {
+	[SerializeField]
+	private GameObject mainMenu;
+	[SerializeField]
+	private GameObject howToMenu;
+	[SerializeField]
+	private GameObject credits;
+
 
 	public void NewGame() {
-		transform.FindChild("MainMenu").gameObject.SetActive(false);
-		transform.FindChild("HowToMenu").gameObject.SetActive(true);
-		transform.FindChild("Credits").gameObject.SetActive(false);
+		mainMenu.gameObject.SetActive(false);
+		howToMenu.gameObject.SetActive(true);
+		credits.gameObject.SetActive(false);
 	}
 
 	public void Credits() {
-		transform.FindChild("MainMenu").gameObject.SetActive(false);
-		transform.FindChild("HowToMenu").gameObject.SetActive(false);
-		transform.FindChild("Credits").gameObject.SetActive(true);
+		mainMenu.gameObject.SetActive(false);
+		howToMenu.gameObject.SetActive(false);
+		credits.gameObject.SetActive(true);
 	}
 
 	public void Exit() {
@@ -21,8 +29,14 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void Back() {
-		transform.FindChild("MainMenu").gameObject.SetActive(true);
-		transform.FindChild("HowToMenu").gameObject.SetActive(false);
-		transform.FindChild("Credits").gameObject.SetActive(false);
+		mainMenu.gameObject.SetActive(true);
+		howToMenu.gameObject.SetActive(false);
+		credits.gameObject.SetActive(false);
+	}
+
+	public void Update() {
+		if (Input.GetButtonDown("Cancel")) {
+			Back();
+		}
 	}
 }
