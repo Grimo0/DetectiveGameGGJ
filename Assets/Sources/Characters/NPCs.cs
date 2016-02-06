@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class NPCs : MonoBehaviour {
 
-	public Vector2 range;
-
 	public GameObject prefabNPC, prefabKiller;
 
 	public Level level;
@@ -79,7 +77,6 @@ public class NPCs : MonoBehaviour {
 
 			npcAppearance.transform.parent = charactersContainer;
 
-			npcAppearance.transform.position = new Vector3(Random.Range(-range.x, range.x), 1f, Random.Range(-range.y, range.y));
 			parts = new CharacterPart[4];
 			parts[0] = _hats[Random.Range(0, _hats.Length)];
 			parts[1] = _heads[Random.Range(0, _heads.Length)];

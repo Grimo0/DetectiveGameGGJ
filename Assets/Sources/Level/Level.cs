@@ -30,6 +30,7 @@ public class Level : MonoBehaviour
 
 	public void AddCharacter(Transform character)
 	{
+		character.position = new Vector3(Random.Range(-41, 41), 1f, Random.Range(-20, 20));
 		m_Characters.Add(character);
 	}
 		
