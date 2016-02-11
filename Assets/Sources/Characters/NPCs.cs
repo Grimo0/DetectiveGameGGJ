@@ -10,14 +10,18 @@ public class NPCs : MonoBehaviour {
 
     public Transform charactersContainer;
 
-    public int nbrOfCharacters;
+	[SerializeField]
+    private int nbrOfCharacters;
 
-	public List<Appearance> npcs;
+	private List<Appearance> npcs;
     private CharacterPart[] _hats;
 	private CharacterPart[] _heads; 
 	private CharacterPart[] _bodies;
 	private CharacterPart[] _pants;
 
+	public List<Appearance> Npcs {
+		get { return this.npcs; }
+	}
 
 	public CharacterPart[] Hats {
 		get { return this._hats; }
@@ -34,6 +38,7 @@ public class NPCs : MonoBehaviour {
 	public CharacterPart[] Pants {
 		get { return this._pants; }
 	}
+
 
 	public void Initialize()
     {
@@ -60,8 +65,24 @@ public class NPCs : MonoBehaviour {
 		for (int i = 0; i < pantSprites.Length; i++) {
 			_pants[i] = new CharacterPart(pantSprites[i], CharacterPart.Category.PANT, "");
 		}
+	}
 
-		GenerateNPCs();
+	public void GenerateKiller() {
+		Appearance appearance;
+		CharacterPart[] parts;
+
+		appearance = Instantiate(prefabKiller).GetComponent<Appearance>();
+
+		appearance.transform.parent = charactersContainer;
+
+		parts = new CharacterPart[4];
+		parts[0] = _hats[Random.Range(0, _hats.Length)];
+		parts[1] = _heads[Random.Range(0, _heads.Length)];
+		parts[2] = _bodies[Random.Range(0, _bodies.Length)];
+		parts[3] = _pants[Random.Range(0, _pants.Length)];
+		appearance.Initialize(parts);
+
+		level.AddCharacter(appearance.transform);
 	}
 
 	public void GenerateNPCs() {
@@ -70,10 +91,7 @@ public class NPCs : MonoBehaviour {
 		CharacterPart[] parts;
 		for (int i = 0; i < nbrOfCharacters; i++)
 		{
-			if (i == 0)
-				npcAppearance = Instantiate(prefabKiller).GetComponent<Appearance>();
-			else
-				npcAppearance = Instantiate(prefabNPC).GetComponent<Appearance>();
+			npcAppearance = Instantiate(prefabNPC).GetComponent<Appearance>();
 
 			npcAppearance.transform.parent = charactersContainer;
 
@@ -87,33 +105,34 @@ public class NPCs : MonoBehaviour {
 			level.AddCharacter(npcAppearance.transform);
 			npcs.Add(npcAppearance);
 
-			if(i > 0)
+			NPC npc = npcAppearance.GetComponent<NPC>();
+			MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
+			if (npcMoveToTarget != null)
 			{
-				NPC npc = npcAppearance.GetComponent<NPC>();
-				MoveToTarget npcMoveToTarget = npc.GetMoveToTarget();
-				if (npcMoveToTarget != null)
-				{
-					npcMoveToTarget.Init(killerBehavior, level);
-				}
+				npcMoveToTarget.Init(killerBehavior, level);
+			}
 
-				MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
-				if (npcMoveToWaypoints != null)
-				{
-					level.SetRandomPath(npcMoveToWaypoints);
-				}
+			MoveToWaypoints npcMoveToWaypoints = npc.FindBehaviour<MoveToWaypoints>();
+			if (npcMoveToWaypoints != null)
+			{
+				level.SetRandomPath(npcMoveToWaypoints);
+			}
 
-				MoveToNewWaypoints npcMoveToNewWaypoints = npc.FindBehaviour<MoveToNewWaypoints>();
-				if (npcMoveToNewWaypoints != null)
-				{
-					npcMoveToNewWaypoints.Init(level);
-				}
+			MoveToNewWaypoints npcMoveToNewWaypoints = npc.FindBehaviour<MoveToNewWaypoints>();
+			if (npcMoveToNewWaypoints != null)
+			{
+				npcMoveToNewWaypoints.Init(level);
+			}
 
-				MoveToSolo npcMoveToSolo = npc.FindBehaviour<MoveToSolo>();
-				if (npcMoveToSolo != null)
-				{
-					npcMoveToSolo.Init(level);
-				}
+			MoveToSolo npcMoveToSolo = npc.FindBehaviour<MoveToSolo>();
+			if (npcMoveToSolo != null)
+			{
+				npcMoveToSolo.Init(level);
 			}
 		}
+	}
+
+	public void RemoveNPC(Appearance npc) {
+		npcs.Remove(npc);
 	}
 }

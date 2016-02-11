@@ -19,6 +19,8 @@ public class Detective : MonoBehaviour {
 
 	public UnityEvent OnDoorOpen;
 
+	public EndGame endGame;
+
     private bool shootMode;
     public bool ShootMode
     {
@@ -29,20 +31,21 @@ public class Detective : MonoBehaviour {
             if (shootMode)
             {
                 Cursor.SetCursor(cursorTarget, Vector2.one * 16f, CursorMode.Auto);
-				Source.PlayOneShot (ReloadGun);
+				Source.PlayOneShot(ReloadGun);
             }
             else
                 Cursor.SetCursor(cursorLock, Vector2.one * 16f, CursorMode.Auto);
         }
-        get { return shootMode;  }
+        get { return shootMode; }
     }
 
     private CharacterMouseOver targetCharacter;
 	private Door               targetDoor;
 
-    RaycastHit hit;
+    private RaycastHit hit;
 
-    Texture2D cursorTarget, cursorLock;
+	private Texture2D cursorTarget, cursorLock;
+
 
     void Start()
     {
@@ -99,9 +102,9 @@ public class Detective : MonoBehaviour {
 				Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
 
                 if (targetCharacter.transform.parent.tag == "Player")
-                    GetComponent<EndGame>().DetectiveWins();
+					endGame.DetectiveWins();
                 else
-                    GetComponent<EndGame>().WrongKillerKilled();
+					endGame.WrongKillerKilled();
 
 				enabled = false;
             }

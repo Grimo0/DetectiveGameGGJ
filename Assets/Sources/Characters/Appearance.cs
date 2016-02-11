@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Appearance : MonoBehaviour {
-	
+
 	private CharacterPart[] parts;
 	public SpriteRenderer[] partsRenderer = new SpriteRenderer[4];
 
@@ -42,9 +42,9 @@ public class Appearance : MonoBehaviour {
         Invoke("DestroySelf", 3f);
     }
 
-    void DestroySelf()
+    private void DestroySelf()
     {
-        GameObject.Find("GameManager").GetComponent<NPCs>().npcs.Remove(this);
+        GameObject.Find("GameManager").GetComponent<NPCs>().RemoveNPC(this);
 
         KillerBehavior killerBehavior = GameObject.Find("GameManager").GetComponent<KillerBehavior>();
         if (killerBehavior.Kill(GetComponent<NPC>()))

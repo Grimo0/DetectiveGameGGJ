@@ -7,20 +7,20 @@ using System.Collections.Generic;
 public class ShootModeUI : MonoBehaviour {
 
     [SerializeField]
-    Detective detective;
+	private Detective detective;
     [SerializeField]
-	Sprite shootModeON;
+	private Sprite shootModeON;
 	[SerializeField]
-	Sprite shootModeOFF;
+	private Sprite shootModeOFF;
 
 	[SerializeField]
-	Image[] energyBars;
+	private Image[] energyBars;
 
-    bool shootMode = false;
+	private bool shootMode = false;
 
-    Image icon;
+	private Image icon;
 
-	float energyCounter;
+	private float energyCounter;
 
 	private List<int> energyBarIndices = new List<int>{0,1,2};
 

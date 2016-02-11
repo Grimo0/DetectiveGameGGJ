@@ -25,8 +25,8 @@ public class Level : MonoBehaviour
 	[SerializeField]
 	private List<Solo> m_Solos;
 
-	[SerializeField]
-	private List<Transform> m_Characters;
+	private List<Transform> m_Characters = new List<Transform>();
+
 
 	public void AddCharacter(Transform character)
 	{
@@ -43,8 +43,7 @@ public class Level : MonoBehaviour
 
 	public Transform GetRandomTarget()
 	{
-		//avoid picking killer
-		return m_Characters[Random.Range(1, m_Characters.Count)];
+		return m_Characters[Random.Range(0, m_Characters.Count)];
 	}
 
 	public Transform GetRandomSolo()
@@ -54,7 +53,6 @@ public class Level : MonoBehaviour
 
 	public void StartNPCBehaviours()
 	{
-		//skip killer
 		for (int i = 1; i < m_Characters.Count; i++)
 		{
 			NPC currentNPC = m_Characters[i].GetComponent<NPC>();

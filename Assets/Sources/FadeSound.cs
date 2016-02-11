@@ -19,6 +19,7 @@ public class FadeSound : MonoBehaviour
 
 	private float m_Fade;
 
+
 	void Update() 
 	{
 		if (m_IsStopped)
