@@ -1,0 +1,13 @@
+Le tuto se lance dès que le joueur clic sur "jouer" dans l'écran titre.
+
+img 01 : on commence par le tuto sur mr.nobody, ses objectifs, etc..
+img 02 : idem avec l'inspecteur
+img 03 : c'est sur cet écran qu'on détermine les contrôles de chaque joueur, en fonction de l'input,
+	 on affichera les contrôles clavier/souris ou manette.
+img 04_a : Pour l'input manette, les contrôles manettes s'affichent. Dès que les deux joueurs sont prêts,
+	   un chrono de 10sec se lance avant le début de la partie, pour laisser le temps aux joueurs
+	   d'assimiler les contrôles
+img 04_b : Idem mais avec les contrôles clavier/souris
+
+Il n'y a pas encore de bouton skip pour passer les slides, à cause de l'input à effectuer pour skip
+(pas encore fixé). Si vous avez des questions ou des suggestions sur tout ça, tell me !
