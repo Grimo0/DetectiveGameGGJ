@@ -25,6 +25,7 @@ public class EndGame : MonoBehaviour {
 	[SerializeField]
 	AudioSource source;
 
+
     public void TimerFinished()
     {
         ShowEndGameScreen(false);
@@ -60,7 +61,7 @@ public class EndGame : MonoBehaviour {
 
 		fadeSound.Stop();
 
-		AudioClip clip = hasKillerWon ? killerClip : cukooClip;
+		AudioClip clip = hasKillerWon ? killerClip : null;
 		source.PlayOneShot(clip);
 
 		Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
@@ -69,7 +70,9 @@ public class EndGame : MonoBehaviour {
     }
 
     public void MainMenu()
-    {
+	{
+		Time.timeScale = 1f;
+		endScreen.SetActive(false);
         SceneManager.LoadScene(0);
     }
 }

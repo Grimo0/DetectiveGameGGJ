@@ -4,22 +4,43 @@ using System.Collections;
 public class GameStart : MonoBehaviour {
 
     [SerializeField]
-    NPCs npcs;
+    private NPCs npcs;
     [SerializeField]
-    KillerBehavior killerBehaviour;
+    private KillerBehavior killerBehaviour;
 	[SerializeField]
-	Level level;
+	private Level level;
 
 	[SerializeField]
-	AudioSource source;
+	private AudioClip killerClip;
+
+	[SerializeField]
+	private AudioSource clip;
+
+	[SerializeField]
+	private AudioSource background;
+
+	private bool killerStart;
+
 
     public void StartGame()
     {
+		killerStart = false;
         npcs.Initialize();
-        killerBehaviour.Initialize();
-		level.StartNPCBehaviours();
+		npcs.GenerateKiller();
+		killerBehaviour.Initialize();
 
 		//play background music
-		source.Play();
+		background.Play();
     }
+
+	public void Update() {
+		if(!killerStart && Input.GetButtonDown("Controller_Action"))
+		{
+			killerStart = true;
+			clip.PlayOneShot(killerClip);
+			npcs.GenerateNPCs();
+			level.StartNPCBehaviours();
+			killerBehaviour.NewMission();
+		}
+	}
 }

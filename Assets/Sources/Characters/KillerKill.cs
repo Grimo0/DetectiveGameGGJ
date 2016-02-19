@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class KillerKill : MonoBehaviour {
 
-    Transform targetCharacter;
-	public AudioClip[] BruitageCri;
-	public AudioSource Source;
+    private Transform targetCharacter;
+	public AudioClip[] screams;
+	public AudioSource source;
 
-	private FadeSound FadeSound;
+	private FadeSound fadeSound;
 
 	private IEnumerator DestroyCoroutine;
 
-	void Start()
+
+	public void Start()
 	{
-		FadeSound = FindObjectOfType<FadeSound>();	
+		fadeSound = FindObjectOfType<FadeSound>();
 	}
 		
-	void OnTriggerStay(Collider obj)
+	public void OnTriggerStay(Collider obj)
     {
         if(obj.tag == "SelectionCollider" && obj.transform != targetCharacter)
         {
@@ -32,7 +34,7 @@ public class KillerKill : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit(Collider obj)
+	public void OnTriggerExit(Collider obj)
     {
         if (obj.tag == "SelectionCollider")
         {
@@ -43,25 +45,25 @@ public class KillerKill : MonoBehaviour {
         }
     }
 
-    void Update()
+	public void Update()
     {
         if(Input.GetButtonDown("Controller_Action") && targetCharacter != null)
         {
             Debug.Log("killer has killed " + targetCharacter.name);
             
-            Invoke("Laugth", 3f);
+            Invoke("Scream", 3f);
             GameObject.Find("KillerUI").GetComponent<KillerUI>().DoPentacleAnim();
 
             targetCharacter.GetComponentInParent<Appearance>().DoDeathAnim();
 
             targetCharacter = null;
 
-			FadeSound.StopWithDelay();
+			fadeSound.StopWithDelay();
         }
     }
 
-    void Laugth()
+	public void Scream()
     {
-		Source.PlayOneShot(BruitageCri[Random.Range(0,BruitageCri.Length)]);
+		source.PlayOneShot(screams[Random.Range(0,screams.Length)]);
     }
 }

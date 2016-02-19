@@ -4,8 +4,6 @@ using System.Collections;
 public class AnimationEvent : MonoBehaviour 
 {
 	[SerializeField]
-	private AudioClip m_KillerClip;
-	[SerializeField]
 	private AudioClip m_CukooClip;
 
 	[SerializeField]
@@ -14,10 +12,6 @@ public class AnimationEvent : MonoBehaviour
 	[SerializeField]
 	private GameStart m_GameStart;
 
-	public void PlayKiller()
-	{
-		m_Source.PlayOneShot(m_KillerClip);
-	}
 
 	public void PlayKukoo()
 	{
